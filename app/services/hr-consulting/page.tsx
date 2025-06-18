@@ -7,6 +7,12 @@ import IncludedList from '@/components/services/IncludedList';
 import ValueProposition from '@/components/services/ValueProposition';
 import ServiceCTA from '@/components/shared/CTA';
 import { serviceData } from './data';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'HR Consulting Services',
+    description: 'Strategic HR guidance to optimize your people processes, ensure compliance, and build high-performing teams. Transform your HR function with expert consulting tailored to the Lao business environment.',
+}
 
 export default function HRConsultingPage() {
     return (

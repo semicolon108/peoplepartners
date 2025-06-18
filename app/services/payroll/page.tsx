@@ -7,6 +7,12 @@ import IncludedList from '@/components/services/IncludedList';
 import ValueProposition from '@/components/services/ValueProposition';
 import ServiceCTA from '@/components/shared/CTA';
 import { serviceData } from './data';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Payroll Services',
+    description: 'Ensure 100% compliance and reduce administrative burden with our expert payroll services in Laos. We handle tax, social security, and timely processing.',
+};
 
 export default function PayrollPage() {
     return (

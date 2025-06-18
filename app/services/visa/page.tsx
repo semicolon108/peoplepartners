@@ -7,6 +7,12 @@ import IncludedList from '@/components/services/IncludedList';
 import ValueProposition from '@/components/services/ValueProposition';
 import ServiceCTA from '@/components/shared/CTA';
 import { serviceData } from './data';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Visa & Immigration Services',
+    description: 'Complete visa and work permit assistance for international employees entering Laos. We navigate the complex immigration process so your team can focus on what matters most - your business.',
+}
 
 export default function VisaPage() {
     return (

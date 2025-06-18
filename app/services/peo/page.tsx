@@ -6,6 +6,12 @@ import IncludedList from '@/components/services/IncludedList';
 import ValueProposition from '@/components/services/ValueProposition';
 import ServiceCTA from '@/components/shared/CTA';
 import { serviceData } from './data';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'PEO / Employer of Record',
+    description: 'Enter the Lao market without establishing a legal entity. We become the legal employer of your staff while you retain full operational control, enabling rapid market entry with complete compliance.',
+}
 
 export default function PEOPage() {
     return (

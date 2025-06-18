@@ -7,6 +7,12 @@ import IncludedList from '@/components/services/IncludedList';
 import ValueProposition from '@/components/services/ValueProposition';
 import ServiceCTA from '@/components/shared/CTA';
 import { serviceData } from './data';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Recruitment Services',
+    description: 'Access top talent in Laos through our extensive network and proven recruitment methodologies. Leverage 108Jobs\' platform and our deep local expertise to find quality candidates faster.',
+}
 
 export default function RecruitmentPage() {
     return (

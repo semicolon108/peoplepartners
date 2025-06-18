@@ -8,6 +8,12 @@ import ValueProposition from '@/components/services/ValueProposition';
 import ServiceCTA from '@/components/shared/CTA';
 import { serviceData } from './data';
 import BpoCategoriesGrid from './BpoCategoriesGrid';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Business Process Outsourcing',
+    description: 'Streamline your operations and reduce costs by outsourcing non-core business processes to our expert team. Focus on what you do best while we handle the rest with efficiency and precision.',
+}
 
 export default function BPOPage() {
     return (
