@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   },
   description: 'Compliant. Efficient. Reliable. We combine unmatched local expertise with international service standards to power your business growth in Laos.',
   // Add other global metadata
-  metadataBase: new URL('https://www.peoplepartnerslao.la'), 
+  metadataBase: new URL('https://www.peoplepartners.la'), 
   openGraph: {
     title: 'People Partners Lao',
     description: 'Your Expert HR Partner in Laos',
-    url: 'https://www.peoplepartnerslao.la',
+    url: 'https://www.peoplepartners.la',
     siteName: 'People Partners Lao',
     // Provide a URL for your main social sharing image
     images: [

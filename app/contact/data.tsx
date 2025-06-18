@@ -18,7 +18,7 @@ export const contactDetails: ContactDetail[] =[
         icon: <Mail />,
         title: "Email Us",
         lines: [
-            { text: "info@peoplepartnerslaos.la", href: "mailto:info@peoplepartnerslaos.la" },
+            { text: "info@peoplepartners.la", href: "mailto:info@peoplepartners.la" },
             { text: "We typically respond within 24 hours" }
         ]
     },
