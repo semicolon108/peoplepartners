@@ -1,5 +1,5 @@
 // app/services/bpo/data.tsx
-import { Settings, HandCoins, Focus, Zap, Gauge, Users, Phone, FileText } from 'lucide-react';
+import { Settings, HandCoins, Focus, Zap, Gauge, Users, FileText } from 'lucide-react';
 
 export const serviceData = {
     title: 'Business Process Outsourcing',
@@ -14,7 +14,6 @@ export const serviceData = {
     bpoCategories: [
         { icon: <Users />, title: 'Finance & Accounting', services: ['Accounts Payable/Receivable', 'Bookkeeping', 'Financial Reporting', 'Expense Management'] },
         { icon: <Users />, title: 'Human Resources', services: ['Employee Onboarding', 'Benefits Administration', 'HR Documentation', 'Training & Development'] },
-        { icon: <Phone />, title: 'Customer Support', services: ['Call Center Operations', 'Email & Chat Support', 'Technical Support', 'Help Desk Services'] },
         { icon: <FileText />, title: 'Admin Support', services: ['Data Entry & Processing', 'Document Management', 'Virtual Assistant Services', 'Scheduling & Coordination'] },
     ],
     processSteps: [

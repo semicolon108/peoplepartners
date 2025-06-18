@@ -22,6 +22,32 @@ export const serviceData = {
         "Networking guidance & introductions",
         "90-day post-placement support",
     ],
+    processSteps: [
+        {
+            title: 'Career Assessment',
+            description: 'Comprehensive evaluation of your skills, experience, values, and career aspirations to identify opportunities and gaps.'
+        },
+        {
+            title: 'Strategic Planning',
+            description: 'Develop a personalized career roadmap with clear goals, timelines, and actionable steps to achieve your objectives.'
+        },
+        {
+            title: 'Brand Development',
+            description: 'Create compelling CV, LinkedIn profile, and personal branding materials that showcase your unique value proposition.'
+        },
+        {
+            title: 'Interview Preparation',
+            description: 'Intensive interview coaching with mock sessions, feedback, and techniques to confidently present yourself to employers.'
+        },
+        {
+            title: 'Active Job Search',
+            description: 'Targeted job search execution with ongoing support, introductions, and guidance throughout the application process.'
+        },
+        {
+            title: 'Success & Integration',
+            description: 'Negotiation support and 30-day follow-up to ensure successful transition and continued career growth.'
+        },
+    ],
 
     valueProposition: {
         title: "Career Development Packages",

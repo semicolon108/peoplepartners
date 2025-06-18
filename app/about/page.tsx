@@ -35,6 +35,9 @@ export default function AboutPage() {
                                     People Partners Lao was established as the sister company of 108Jobs, Laos&apos; No. 1 job portal since 2011. Born from the vision to bridge the gap between international business needs and local HR expertise, we have been serving the Lao market for over a decade.
                                 </p>
                                 <p className="text-brand-gray">
+                                    Our journey began with a simple mission: to empower businesses to thrive in Laos by handling their most complex HR challenges. Today, we are proud to be the trusted partner of multinational corporations and growing businesses across various industries.
+                                </p>
+                                <p className="text-brand-gray">
                                     What sets us apart is our unique position as both a local expert and international service provider. We understand the nuances of Lao business culture while maintaining the highest global standards in HR service delivery.
                                 </p>
                             </div>
