@@ -1,0 +1,14 @@
+<!-- public/grid-pattern.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <!-- 
+      - width="10" height="10": Creates a small 10x10 grid.
+      - stroke="white": The color of the lines. We control opacity in CSS.
+      - stroke-width="0.5": Creates thin lines.
+    -->
+    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+</svg>
