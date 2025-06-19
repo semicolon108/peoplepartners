@@ -11,12 +11,12 @@ export default function Trust() {
                     href="https://www.108.jobs/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-gradient-to-br from-brand-yellow-light to-brand-yellow text-white font-semibold px-8 py-3 rounded-full mb-8 text-lg hover:shadow-lg transition-shadow"
+                    className="inline-block bg-gradient-to-br from-brand-yellow-300 to-brand-yellow-400 text-white font-semibold px-8 py-3 rounded-full mb-8 text-lg hover:shadow-lg transition-shadow"
                 >
                     Sister Company of 108Jobs - Laos&apos; No.1 Job Portal
                 </a>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-blue-dark">Trusted by Leading Companies</h2>
-                <p className="text-brand-gray max-w-2xl mx-auto mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-blue-700">Trusted by Leading Companies</h2>
+                <p className="text-brand-gray-500 max-w-2xl mx-auto mb-10">
                     Our clients trust us with their most valuable asset - their people. Join the growing list of companies that rely on our expertise.
                 </p>
                 <div className="flex justify-center items-center gap-x-10 gap-y-6 flex-wrap">

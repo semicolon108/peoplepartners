@@ -1,4 +1,4 @@
-// app/services/career-transitioning/page.tsx
+// app/services/salary-survey/page.tsx
 import Breadcrumb from '@/components/services/Breadcrumb';
 import ServiceHero from '@/components/services/ServiceHero';
 import FeaturesGrid from '@/components/services/FeaturesGrid';
@@ -9,37 +9,31 @@ import { serviceData } from './data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Career Transitioning Services',
-    description: 'Advance your career with professional coaching, CV optimization, and interview preparation. We help talented individuals unlock new opportunities and achieve their career goals in Laos\' competitive job market.',
+    title: 'Salary Survey Services - Comprehensive Compensation Benchmarking',
+    description: 'Make informed compensation decisions with comprehensive salary benchmarking data. Our third annual salary survey provides critical market intelligence to help you attract talent, retain employees, and optimize your HR budget in Laos\' competitive market.',
 }
 
-export default function CareerTransitioningPage() {
+export default function SalarySurveyPage() {
     return (
         <div className="pt-20">
-            <Breadcrumb pageTitle="Career Transitioning" />
+            <Breadcrumb pageTitle="Salary Survey" />
             <ServiceHero
                 title={serviceData.title}
                 description={serviceData.description}
                 icon={serviceData.heroIcon}
-                buttonText="Start Your Career Journey"
+                buttonText="Access Survey Data"
                 buttonLink="/contact#consultation"
             />
             <main>
                 <section className="py-20 bg-white">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Unlock Your Career Potential</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Comprehensive Market Intelligence</h2>
                         <FeaturesGrid features={serviceData.features} />
                     </div>
                 </section>
-                {/* <section className="py-20 bg-brand-gray-light">
-                    <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-dark">What&apos;s Included</h2>
-                        <IncludedList items={serviceData.includedItems} />
-                    </div>
-                </section> */}
                 <section className="py-20 bg-white">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Our Payroll Process</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Our Survey Process</h2>
                         <ProcessTimeline steps={serviceData.processSteps} />
                     </div>
                 </section>

@@ -58,7 +58,7 @@ export default function ContactForm() {
 
     return (
         <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
-            <h2 className="text-2xl font-bold mb-6 text-brand-blue-dark">Send Us a Message</h2>
+            <h2 className="text-2xl font-bold mb-6 text-brand-blue-900">Send Us a Message</h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Name Fields */}
@@ -73,7 +73,7 @@ export default function ContactForm() {
                             name="firstName"
                             required
                             disabled={status === 'sending'}
-                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue focus:border-brand-blue disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                         />
                     </div>
                     <div>
@@ -86,7 +86,7 @@ export default function ContactForm() {
                             name="lastName"
                             required
                             disabled={status === 'sending'}
-                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue focus:border-brand-blue disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                         />
                     </div>
                 </div>
@@ -102,7 +102,7 @@ export default function ContactForm() {
                         name="email"
                         required
                         disabled={status === 'sending'}
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue focus:border-brand-blue disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                 </div>
 
@@ -116,7 +116,7 @@ export default function ContactForm() {
                         id="phone"
                         name="phone"
                         disabled={status === 'sending'}
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue focus:border-brand-blue disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                 </div>
 
@@ -130,7 +130,7 @@ export default function ContactForm() {
                         id="company"
                         name="company"
                         disabled={status === 'sending'}
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue focus:border-brand-blue disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                 </div>
 
@@ -143,7 +143,7 @@ export default function ContactForm() {
                         id="service"
                         name="service"
                         disabled={status === 'sending'}
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue focus:border-brand-blue disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         <option value="">Select a service</option>
                         {servicesOfInterest.map(service => (
@@ -166,7 +166,7 @@ export default function ContactForm() {
                         rows={5}
                         disabled={status === 'sending'}
                         placeholder="Tell us about your HR needs and how we can help..."
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue focus:border-brand-blue disabled:opacity-50 disabled:cursor-not-allowed resize-none"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed resize-none"
                     />
                 </div>
 
@@ -174,7 +174,7 @@ export default function ContactForm() {
                 <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="w-full bg-gradient-to-r from-brand-blue to-brand-blue-light text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:transform-none"
+                    className="w-full bg-gradient-to-r from-brand-blue-700 to-brand-blue-500 text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:transform-none"
                 >
                     {status === 'sending' ? (
                         <span className="flex items-center justify-center">

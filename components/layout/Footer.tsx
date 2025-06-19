@@ -8,33 +8,26 @@ const services = [
   { name: "Business Process Outsourcing", href: "/services/bpo" },
   { name: "Recruitment Services", href: "/services/recruitment" },
   { name: "Career Transitioning", href: "/services/career-transitioning" },
+  { name: "Salary Survey", href: "/services/salary-survey" },
   { name: "HR Consulting", href: "/services/hr-consulting" },
   { name: "Visa & Immigration", href: "/services/visa" },
 ];
 
 const companyLinks = [
   { name: "Why Choose Us?", href: "/about" },
-  { name: "Careers", href: "/careers" },
+  { name: "Opening Positions", href: "/careers" },
   { name: "Contact Us", href: "/contact" },
   { name: "Free Consultation", href: "/contact#consultation" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-blue-dark text-white py-12">
+    <footer className="bg-brand-blue-950 text-white py-12">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Section 1: About */}
           <div className="footer-section">
-            {/* <h3 className="mb-4 text-blue-400 font-semibold">
-              People Partners Lao
-            </h3>
-            <p className="text-slate-300 leading-relaxed">
-              Your trusted HR partner in Laos. Comprehensive solutions for
-              payroll, PEO services, recruitment, and HR consulting.
-            </p> */}
             <Link href="/">
-              {/* Add your logo to the public folder */}
               <Image
                 src="https://upload.wikimedia.org/wikipedia/commons/2/24/108-PP-Logo-Final.svg"
                 alt="People Partners Logo"
@@ -56,7 +49,7 @@ export default function Footer() {
 
           {/* Section 2: Services */}
           <div className="footer-section">
-            <h3 className="mb-4 text-blue-400 font-semibold">Our Services</h3>
+            <h3 className="mb-4 text-blue-400 font-medium">Our Services</h3>
             {services.map((service) => (
               <Link
                 key={service.name}
@@ -70,7 +63,7 @@ export default function Footer() {
 
           {/* Section 3: Company */}
           <div className="footer-section">
-            <h3 className="mb-4 text-blue-400 font-semibold">Company</h3>
+            <h3 className="mb-4 text-blue-400 font-medium">Company</h3>
             {companyLinks.map((link) => (
               <Link
                 key={link.name}
@@ -96,7 +89,7 @@ export default function Footer() {
 
           {/* Section 4: Contact */}
           <div className="footer-section">
-            <h3 className="mb-4 text-blue-400 font-semibold">
+            <h3 className="mb-4 text-blue-400 font-medium">
               Contact Information
             </h3>
             <div className="text-slate-300 space-y-4">
@@ -111,10 +104,10 @@ export default function Footer() {
                 <strong>📧 Email:</strong>
                 <br />
                 <a
-                  href="mailto:info@peoplepartnerslao.com"
+                  href="mailto:info@peoplepartners.la"
                   className="hover:text-white"
                 >
-                  info@peoplepartnerslao.com
+                  info@peoplepartners.la
                 </a>
               </div>
               <div>
@@ -125,8 +118,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        <div className="border-t border-brand-gray-dark pt-4 text-center text-slate-400">
+        <div className="border-t border-brand-gray-700 pt-4 text-center text-slate-400">
           <p>
             © {new Date().getFullYear()} People Partners Lao. All rights
             reserved. | Sister company of 108Jobs

@@ -11,7 +11,7 @@ export default function IncludedList({ items }: IncludedListProps) {
             {items.map((item, index) => (
                 <div key={index} className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span className="text-brand-gray">{item}</span>
+                    <span className="text-brand-gray-500">{item}</span>
                 </div>
             ))}
         </div>

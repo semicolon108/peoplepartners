@@ -23,20 +23,20 @@ export default function ContactPage() {
                     <div className="container">
                         <div className="grid lg:grid-cols-2 gap-12 items-start">
                             {/* Left Side: Contact Information */}
-                            <div className="bg-brand-gray-light p-8 rounded-2xl">
-                                <h2 className="text-2xl font-bold mb-6 text-brand-blue-dark">Contact Information</h2>
+                            <div className="bg-brand-gray-50 p-8 rounded-2xl">
+                                <h2 className="text-2xl font-bold mb-6 text-brand-blue-900">Contact Information</h2>
                                 <div className="space-y-6">
                                     {contactDetails.map(item => (
                                         <div key={item.title} className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm">
-                                            <div className="w-12 h-12 bg-gradient-to-br from-brand-blue to-brand-blue-light text-white rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <div className="w-12 h-12 bg-gradient-to-br from-brand-blue-700 to-brand-blue-500 text-white rounded-lg flex items-center justify-center flex-shrink-0">
                                                 {item.icon}
                                             </div>
                                             <div>
-                                                <h3 className="font-semibold text-brand-blue-dark mb-1">{item.title}</h3>
+                                                <h3 className="text-xl font-medium text-brand-blue-900 mb-1">{item.title}</h3>
                                                 {item.lines.map((line, index) => (
-                                                    <p key={index} className="text-sm text-brand-gray">
+                                                    <p key={index} className="text-sm text-brand-gray-500">
                                                         {line.href ? (
-                                                            <Link href={line.href} target={line.target || '_self'} className="text-brand-blue hover:underline">
+                                                            <Link href={line.href} target={line.target || '_self'} className="text-brand-blue-500 hover:underline">
                                                                 {line.text}
                                                             </Link>
                                                         ) : (
@@ -58,9 +58,9 @@ export default function ContactPage() {
                     </div>
                 </section>
 
-                <section className="py-16 bg-brand-gray-light">
+                <section className="py-16 bg-brand-gray-50">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-8 text-brand-blue-dark">Our Location</h2>
+                        <h2 className="text-2xl font-bold text-center mb-8 text-brand-blue-900">Our Location</h2>
                         <div className="w-full h-96 bg-slate-200 rounded-2xl shadow-md overflow-hidden border border-slate-300">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3795.454443817629!2d102.63184629999999!3d17.957582100000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31246799305c3c0f%3A0x58b467b36136337c!2s108Hill-Office%20%26%20Residence!5e0!3m2!1sen!2sla!4v1750226693193!5m2!1sen!2sla"

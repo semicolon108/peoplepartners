@@ -5,40 +5,69 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
+// Optimized font configuration with better weight selection
+const notoSans = Noto_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-noto-sans',
+  preload: true, // Preload for better performance
+});
+
+// Enhanced metadata with structured data
 export const metadata: Metadata = {
-  // Define a template for page titles
   title: {
     template: '%s | People Partners Lao',
     default: 'People Partners Lao - Your Expert HR Partner in Laos',
   },
   description: 'Compliant. Efficient. Reliable. We combine unmatched local expertise with international service standards to power your business growth in Laos.',
-  // Add other global metadata
-  metadataBase: new URL('https://www.peoplepartners.la'), 
+  keywords: ['HR services', 'Laos', 'human resources', 'business solutions', 'compliance'],
+  authors: [{ name: 'People Partners Lao' }],
+  creator: 'People Partners Lao',
+  publisher: 'People Partners Lao',
+  metadataBase: new URL('https://www.peoplepartners.la'),
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: 'People Partners Lao',
-    description: 'Your Expert HR Partner in Laos',
+    type: 'website',
+    locale: 'en_US',
     url: 'https://www.peoplepartners.la',
+    title: 'People Partners Lao - Your Expert HR Partner in Laos',
+    description: 'Compliant. Efficient. Reliable. We combine unmatched local expertise with international service standards to power your business growth in Laos.',
     siteName: 'People Partners Lao',
-    // Provide a URL for your main social sharing image
     images: [
       {
-        url: '/og-image.png', // Place this image in your /public folder
+        url: '/og-image.png',
         width: 1200,
         height: 630,
+        alt: 'People Partners Lao - HR Solutions',
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'People Partners Lao - Your Expert HR Partner in Laos',
+    description: 'Compliant. Efficient. Reliable. We combine unmatched local expertise with international service standards.',
+    images: ['/og-image.png'],
+  },
+  verification: {
+    // Add your verification IDs when available
+    // google: 'google-verification-id',
+    // other: 'other-verification-id',
   },
 };
-// Use next/font for optimized font loading
-const notoSans = Noto_Sans({
-  subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
-  display: 'swap', // This is a good default for performance
-  variable: '--font-noto-sans', // Define it as a CSS variable (best practice)
-});
-
 
 export default function RootLayout({
   children,
@@ -46,10 +75,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={notoSans.variable}>
+    <html lang="en" className={notoSans.variable}>
+      <body className="font-sans antialiased bg-white text-slate-900 selection:bg-brand-blue/10">
         <Header />
-        <main>{children}</main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
       </body>
     </html>
