@@ -193,6 +193,14 @@
     animation: slideUp 0.5s ease-out;
   }
 
+  .animate-slide-left-infinite {
+    animation: slideLeftInfinite 20s linear infinite;
+  }
+
+  .animate-slide-left-infinite:hover {
+    animation-play-state: paused;
+  }
+
   /* Text utilities */
   .text-balance {
     text-wrap: balance;
@@ -215,5 +223,35 @@
 
   .grid-auto-fill {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftInfinite {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
