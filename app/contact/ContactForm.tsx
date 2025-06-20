@@ -17,14 +17,41 @@ interface ContactFormData {
 export default function ContactForm() {
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
+    const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+
+    // Client-side validation
+    const validateForm = (data: ContactFormData): Record<string, string> => {
+        const errors: Record<string, string> = {};
+
+        if (!data.firstName.trim()) errors.firstName = 'First name is required';
+        if (!data.lastName.trim()) errors.lastName = 'Last name is required';
+        if (!data.email.trim()) {
+            errors.email = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+            errors.email = 'Please enter a valid email address';
+        }
+        if (!data.message.trim()) errors.message = 'Message is required';
+        if (data.message.length > 2000) errors.message = 'Message is too long (max 2000 characters)';
+
+        return errors;
+    };
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         setStatus('sending');
         setErrorMessage('');
+        setValidationErrors({});
 
         const formData = new FormData(event.target as HTMLFormElement);
         const data = Object.fromEntries(formData.entries()) as unknown as ContactFormData;
+
+        // Client-side validation
+        const errors = validateForm(data);
+        if (Object.keys(errors).length > 0) {
+            setValidationErrors(errors);
+            setStatus('idle');
+            return;
+        }
 
         try {
             const response = await fetch('/api/contact', {
@@ -73,8 +100,13 @@ export default function ContactForm() {
                             name="firstName"
                             required
                             disabled={status === 'sending'}
-                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${
+                                validationErrors.firstName ? 'border-red-500' : 'border-slate-300'
+                            }`}
                         />
+                        {validationErrors.firstName && (
+                            <p className="mt-1 text-sm text-red-600">{validationErrors.firstName}</p>
+                        )}
                     </div>
                     <div>
                         <label htmlFor="lastName" className="block text-sm font-medium text-slate-700 mb-1">
@@ -86,8 +118,13 @@ export default function ContactForm() {
                             name="lastName"
                             required
                             disabled={status === 'sending'}
-                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${
+                                validationErrors.lastName ? 'border-red-500' : 'border-slate-300'
+                            }`}
                         />
+                        {validationErrors.lastName && (
+                            <p className="mt-1 text-sm text-red-600">{validationErrors.lastName}</p>
+                        )}
                     </div>
                 </div>
 
@@ -102,8 +139,13 @@ export default function ContactForm() {
                         name="email"
                         required
                         disabled={status === 'sending'}
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${
+                            validationErrors.email ? 'border-red-500' : 'border-slate-300'
+                        }`}
                     />
+                    {validationErrors.email && (
+                        <p className="mt-1 text-sm text-red-600">{validationErrors.email}</p>
+                    )}
                 </div>
 
                 {/* Phone Field */}
@@ -166,8 +208,13 @@ export default function ContactForm() {
                         rows={5}
                         disabled={status === 'sending'}
                         placeholder="Tell us about your HR needs and how we can help..."
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed resize-none"
+                        className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed resize-none ${
+                            validationErrors.message ? 'border-red-500' : 'border-slate-300'
+                        }`}
                     />
+                    {validationErrors.message && (
+                        <p className="mt-1 text-sm text-red-600">{validationErrors.message}</p>
+                    )}
                 </div>
 
                 {/* Submit Button */}

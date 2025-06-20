@@ -2,6 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { contactFormRateLimit } from "@/lib/rate-limit";
 
 // Email configuration for peoplepartners.la domain
 const createTransporter = () => {
@@ -19,7 +20,7 @@ const createTransporter = () => {
     });
 };
 
-// Improved validation function
+// Improved validation function with sanitization
 interface FormData {
     firstName: string;
     lastName: string;
@@ -30,20 +31,49 @@ interface FormData {
     message: string;
 }
 
+// Simple HTML sanitization function
+const sanitizeInput = (input: string): string => {
+    return input
+        .replace(/[<>]/g, '') // Remove < and > characters
+        .replace(/javascript:/gi, '') // Remove javascript: protocol
+        .replace(/on\w+=/gi, '') // Remove event handlers
+        .trim();
+};
+
 const validateFormData = (data: FormData) => {
     const { firstName, lastName, email, message } = data;
 
-    if (!firstName?.trim() || !lastName?.trim() || !email?.trim() || !message?.trim()) {
+    // Sanitize inputs
+    const sanitizedData = {
+        firstName: sanitizeInput(firstName || ''),
+        lastName: sanitizeInput(lastName || ''),
+        email: sanitizeInput(email || ''),
+        message: sanitizeInput(message || ''),
+        phone: data.phone ? sanitizeInput(data.phone) : '',
+        company: data.company ? sanitizeInput(data.company) : '',
+        service: data.service ? sanitizeInput(data.service) : '',
+    };
+
+    if (!sanitizedData.firstName || !sanitizedData.lastName || !sanitizedData.email || !sanitizedData.message) {
         return { isValid: false, error: "Missing required fields" };
     }
 
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    // Enhanced email validation
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    if (!emailRegex.test(sanitizedData.email)) {
         return { isValid: false, error: "Invalid email format" };
     }
 
-    return { isValid: true };
+    // Length validation
+    if (sanitizedData.firstName.length > 50 || sanitizedData.lastName.length > 50) {
+        return { isValid: false, error: "Name fields too long" };
+    }
+
+    if (sanitizedData.message.length > 2000) {
+        return { isValid: false, error: "Message too long (max 2000 characters)" };
+    }
+
+    return { isValid: true, data: sanitizedData };
 };
 
 // Create HTML email template
@@ -72,6 +102,20 @@ const createEmailHTML = (formData: FormData) => {
 
 export async function POST(req: NextRequest) {
     try {
+        // Apply rate limiting
+        const rateLimitResult = contactFormRateLimit(req);
+        if (!rateLimitResult.success) {
+            return NextResponse.json(
+                { error: "Too many requests. Please try again later." },
+                { 
+                    status: 429,
+                    headers: {
+                        'Retry-After': Math.ceil((rateLimitResult.resetTime! - Date.now()) / 1000).toString()
+                    }
+                }
+            );
+        }
+
         const body = await req.json();
 
         // Validate form data
@@ -83,7 +127,9 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const { firstName, lastName, email, phone, company, service, message } = body;
+        // Use sanitized data
+        const sanitizedData = validation.data!;
+        const { firstName, lastName, email } = sanitizedData;
 
         // Create transporter based on environment configuration
         const transporter = createTransporter();
@@ -93,7 +139,7 @@ export async function POST(req: NextRequest) {
             from: process.env.FROM_EMAIL || `"Contact Form" <noreply@peoplepartnerslao.com>`,
             to: process.env.TO_EMAIL || 'info@peoplepartnerslao.com',
             subject: `New Contact Form Submission from ${firstName} ${lastName}`,
-            html: createEmailHTML(body),
+            html: createEmailHTML(sanitizedData),
             replyTo: email, // Allow easy reply to the form submitter
         };
 
@@ -134,8 +180,8 @@ export async function POST(req: NextRequest) {
 }
 
 // Optional: Add rate limiting middleware
-export async function middleware(req: NextRequest) {
-    // Implement rate limiting logic here if needed
-    // This is just a placeholder - you'd want to use a proper rate limiting solution
-    return NextResponse.next();
-}
+// export async function middleware(req: NextRequest) {
+//     // Implement rate limiting logic here if needed
+//     // This is just a placeholder - you'd want to use a proper rate limiting solution
+//     return NextResponse.next();
+// }
