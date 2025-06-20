@@ -97,7 +97,7 @@ export default function AboutPage() {
                                     <div className="w-16 h-16 bg-gradient-to-br from-brand-blue-700 to-brand-blue-500 text-white rounded-xl flex items-center justify-center mb-6">
                                         {card.icon}
                                     </div>
-                                    <h3 className="text-xl font-semibold mb-3 text-brand-blue-dark">
+                                    <h3 className="text-xl font-semibold mb-3 text-brand-blue-900">
                                         {card.title}
                                     </h3>
                                     <p className="text-brand-gray-500">{card.description}</p>

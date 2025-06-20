@@ -22,15 +22,15 @@ export default function Hero() {
                 </Link>
                 <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 mt-16">
                     <div className="text-center">
-                        <div className="text-4xl font-bold text-blue-50">2011</div>
+                        <div className="text-4xl font-bold text-brand-blue-50">2011</div>
                         <div className="text-sm text-slate-100 opacity-80">Established</div>
                     </div>
                     <div className="text-center">
-                        <div className="text-4xl font-bold text-blue-50">20+</div>
+                        <div className="text-4xl font-bold text-brand-blue-50">20+</div>
                         <div className="text-sm text-slate-100 opacity-80">Trusted Clients</div>
                     </div>
                     <div className="text-center">
-                        <div className="text-4xl font-bold text-blue-50">800+</div>
+                        <div className="text-4xl font-bold text-brand-blue-50">800+</div>
                         <div className="text-sm text-slate-100 opacity-80">Payslips/Month</div>
                     </div>
                 </div>

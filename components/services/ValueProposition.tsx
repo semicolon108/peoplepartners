@@ -15,12 +15,12 @@ export default function ValueProposition({ title, description, items }: ValuePro
                     Competitive Pricing
                 </div>
                 <h3 className="text-2xl font-bold text-brand-blue-900 mb-2">{title}</h3>
-                <p className="text-brand-gray max-w-2xl mx-auto">{description}</p>
+                <p className="text-brand-gray-500 max-w-2xl mx-auto">{description}</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                 {items.map((item, index) => (
-                    <div key={index} className="flex items-center gap-3 p-3 bg-brand-gray-light rounded-lg">
-                        <HandCoins className="w-5 h-5 text-brand-blue flex-shrink-0" />
+                    <div key={index} className="flex items-center gap-3 p-3 bg-brand-gray-50 rounded-lg">
+                        <HandCoins className="w-5 h-5 text-brand-blue-600 flex-shrink-0" />
                         <span className="text-slate-700">{item}</span>
                     </div>
                 ))}

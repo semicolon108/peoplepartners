@@ -28,29 +28,29 @@ export default function BPOPage() {
             <main>
                 <section className="py-20 bg-white">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-dark">Transform Your Business Operations</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Transform Your Business Operations</h2>
                         <FeaturesGrid features={serviceData.features} />
                     </div>
                 </section>
-                <section className="py-20 bg-brand-gray-light">
+                <section className="py-20 bg-brand-gray-50">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-dark">Our BPO Service Categories</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Our BPO Service Categories</h2>
                         <BpoCategoriesGrid categories={serviceData.bpoCategories} />
                     </div>
                 </section>
-                {/* <section className="py-20 bg-brand-gray-light">
+                {/* <section className="py-20 bg-brand-gray-50">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-dark">What&apos;s Included</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">What&apos;s Included</h2>
                         <IncludedList items={serviceData.includedItems} />
                     </div>
                 </section> */}
                 <section className="py-20 bg-white">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-dark">Our BPO Implementation Process</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Our BPO Implementation Process</h2>
                         <ProcessTimeline steps={serviceData.processSteps} />
                     </div>
                 </section>
-                <section className="py-20 bg-brand-gray-light">
+                <section className="py-20 bg-brand-gray-50">
                     <div className="container">
                         <ValueProposition {...serviceData.valueProposition} />
                     </div>

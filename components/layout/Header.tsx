@@ -77,19 +77,19 @@ export default function Header() {
         <ul className="hidden lg:flex items-center gap-8">
           {navLinks.slice(0, 1).map((link) => (
             <li key={link.name}>
-              <Link href={link.href} className="font-medium text-slate-700 hover:text-brand-blue transition-colors">
+              <Link href={link.href} className="font-medium text-slate-700 hover:text-brand-blue-600 transition-colors">
                 {link.name}
               </Link>
             </li>
           ))}
 
           <li className="relative group pb-4 -mb-4">
-            <Link href="/#services" className="font-medium text-slate-700 hover:text-brand-blue transition-colors flex items-center gap-1">
+            <Link href="/#services" className="font-medium text-slate-700 hover:text-brand-blue-600 transition-colors flex items-center gap-1">
               Services <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
             </Link>
             <div className="absolute top-full left-0 w-64 bg-white shadow-xl rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-all duration-300 invisible group-hover:visible transform group-hover:translate-y-0 translate-y-2">
               {services.map((service) => (
-                <Link key={service.name} href={service.href} className="block w-full text-left px-4 py-2 text-slate-700 rounded-md hover:bg-slate-100 hover:text-brand-blue">
+                <Link key={service.name} href={service.href} className="block w-full text-left px-4 py-2 text-slate-700 rounded-md hover:bg-slate-100 hover:text-brand-blue-600">
                   {service.name}
                 </Link>
               ))}
@@ -98,7 +98,7 @@ export default function Header() {
 
           {navLinks.slice(1).map((link) => (
             <li key={link.name}>
-              <Link href={link.href} className="font-medium text-slate-700 hover:text-brand-blue transition-colors">
+              <Link href={link.href} className="font-medium text-slate-700 hover:text-brand-blue-600 transition-colors">
                 {link.name}
               </Link>
             </li>
@@ -155,7 +155,7 @@ export default function Header() {
                         key={service.name}
                         href={service.href}
                         onClick={handleLinkClick}
-                        className="block text-sm text-slate-600 py-1 px-2 rounded hover:bg-slate-100 hover:text-brand-blue"
+                        className="block text-sm text-slate-600 py-1 px-2 rounded hover:bg-slate-100 hover:text-brand-blue-600"
                       >
                         {service.name}
                       </Link>
