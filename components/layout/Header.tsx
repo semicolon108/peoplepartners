@@ -57,10 +57,11 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-white/95 backdrop-blur-sm shadow-md'
-        : 'bg-white/80 backdrop-blur-sm'
-        }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/95 backdrop-blur-sm shadow-md"
+          : "bg-white/80 backdrop-blur-sm"
+      }`}
     >
       <nav className="container flex justify-between items-center py-4 relative">
         <Link href="/">
@@ -74,22 +75,36 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <ul className="hidden lg:flex items-center gap-8">
+        <ul className="hidden lg:flex items-center lg:gap-4 xl:gap-8 lg:text-sm xl:text-base">
           {navLinks.slice(0, 1).map((link) => (
             <li key={link.name}>
-              <Link href={link.href} className="font-medium text-slate-700 hover:text-brand-blue transition-colors">
+              <Link
+                href={link.href}
+                className="font-medium text-slate-700 hover:text-brand-blue transition-colors"
+              >
                 {link.name}
               </Link>
             </li>
           ))}
 
           <li className="relative group pb-4 -mb-4">
-            <Link href="/#services" className="font-medium text-slate-700 hover:text-brand-blue transition-colors flex items-center gap-1">
-              Services <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
+            <Link
+              href="/#services"
+              className="font-medium text-slate-700 hover:text-brand-blue transition-colors flex items-center gap-1"
+            >
+              Services{" "}
+              <ChevronDown
+                size={16}
+                className="transition-transform group-hover:rotate-180"
+              />
             </Link>
             <div className="absolute top-full left-0 w-64 bg-white shadow-xl rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-all duration-300 invisible group-hover:visible transform group-hover:translate-y-0 translate-y-2">
               {services.map((service) => (
-                <Link key={service.name} href={service.href} className="block w-full text-left px-4 py-2 text-slate-700 rounded-md hover:bg-slate-100 hover:text-brand-blue">
+                <Link
+                  key={service.name}
+                  href={service.href}
+                  className="block w-full text-left px-4 py-2 text-slate-700 rounded-md hover:bg-slate-100 hover:text-brand-blue"
+                >
                   {service.name}
                 </Link>
               ))}
@@ -98,14 +113,20 @@ export default function Header() {
 
           {navLinks.slice(1).map((link) => (
             <li key={link.name}>
-              <Link href={link.href} className="font-medium text-slate-700 hover:text-brand-blue transition-colors">
+              <Link
+                href={link.href}
+                className="font-medium text-slate-700 hover:text-brand-blue transition-colors"
+              >
                 {link.name}
               </Link>
             </li>
           ))}
 
           <li>
-            <Link href="/contact#consultation" className="bg-gradient-to-r from-brand-blue-700 to-brand-blue-500 text-white font-semibold px-6 py-2 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all">
+            <Link
+              href="/contact#consultation"
+              className="bg-gradient-to-r from-brand-blue-700 to-brand-blue-500 text-white font-semibold px-6 py-2 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all"
+            >
               Get Consultation
             </Link>
           </li>
@@ -113,10 +134,26 @@ export default function Header() {
 
         {/* Mobile Menu Toggle */}
         <div className="lg:hidden relative">
-          <button onClick={() => setMobileMenuOpen((prev) => !prev)} className="text-slate-800">
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+          <button
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            className="text-slate-800"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
               </svg>
             )}
           </button>
@@ -145,7 +182,11 @@ export default function Header() {
                   className="w-full flex justify-between items-center px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 rounded"
                 >
                   Services
-                  {servicesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  {servicesOpen ? (
+                    <ChevronUp size={16} />
+                  ) : (
+                    <ChevronDown size={16} />
+                  )}
                 </button>
 
                 {servicesOpen && (
