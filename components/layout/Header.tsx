@@ -66,7 +66,7 @@ export default function Header() {
       <nav className="container flex justify-between items-center py-4 relative">
         <Link href="/">
           <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/2/24/108-PP-Logo-Final.svg"
+            src="/PPL-Logo.svg"
             alt="People Partners Logo"
             width={150}
             height={40}

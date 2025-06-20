@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="footer-section">
             <Link href="/">
               <Image
-                src="https://upload.wikimedia.org/wikipedia/commons/2/24/108-PP-Logo-Final.svg"
+                src="PPL-Logo.svg"
                 alt="People Partners Logo"
                 width={150}
                 height={40}

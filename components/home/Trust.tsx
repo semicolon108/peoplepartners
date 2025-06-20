@@ -3,7 +3,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const clientLogos = [
     {
@@ -13,7 +13,18 @@ const clientLogos = [
         height: 80,
     },
     {
-        src: "https://upload.wikimedia.org/wikipedia/commons/e/ed/Logo_EssilorLuxottica.svg",
+        src: "/Coca-Cola_logo.svg.png",
+        alt: "Coca cola Logo",
+        width: 180,
+        height: 80,
+    }, {
+        src: "/Colgate-Palmolive_logo.svg",
+        alt: "CP Logo",
+        width: 180,
+        height: 80,
+    },
+    {
+        src: "/Logo_EssilorLuxottica.svg",
         alt: "EssilorLuxottica Logo",
         width: 180,
         height: 80,
@@ -33,6 +44,18 @@ const clientLogos = [
     {
         src: "/OR-logo-color.svg",
         alt: "OR Logo",
+        width: 180,
+        height: 80,
+    },
+    {
+        src: "/Plan_International_Logo_blue.jpg",
+        alt: "Plan Logo",
+        width: 180,
+        height: 80,
+    },
+    {
+        src: "/Unilever.png",
+        alt: "Uni Logo",
         width: 180,
         height: 80,
     },
@@ -68,7 +91,7 @@ export default function Trust() {
                 <p className="text-brand-gray-500 max-w-2xl mx-auto mb-10">
                     Our clients trust us with their most valuable asset - their people. Join the growing list of companies that rely on our expertise.
                 </p>
-                
+
                 {/* Sliding Logo Carousel */}
                 <div className="relative overflow-hidden">
                     <div className="flex animate-slide-left-infinite">
