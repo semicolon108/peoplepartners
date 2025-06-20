@@ -13,6 +13,12 @@ const clientLogos = [
         height: 80,
     },
     {
+        src: "/Kasikornbank_Logo.svg",
+        alt: "Kbank Logo",
+        width: 180,
+        height: 80,
+    },
+    {
         src: "/Coca-Cola_logo.svg.png",
         alt: "Coca cola Logo",
         width: 180,
@@ -56,6 +62,24 @@ const clientLogos = [
     {
         src: "/Unilever.png",
         alt: "Uni Logo",
+        width: 180,
+        height: 80,
+    },
+        {
+        src: "/ANZ-Logo-2009.svg",
+        alt: "ANZ Logo",
+        width: 180,
+        height: 80,
+    },
+        {
+        src: "/iipay.svg",
+        alt: "iipay Logo",
+        width: 180,
+        height: 80,
+    },
+        {
+        src: "/jice.svg",
+        alt: "jice Logo",
         width: 180,
         height: 80,
     },
