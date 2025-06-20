@@ -23,7 +23,7 @@ export default function ProcessTimeline({ steps }: ProcessTimelineProps) {
                         </div>
                         <div>
                             <h4 className="font-semibold text-lg text-brand-blue-900 mb-1">{step.title}</h4>
-                            <p className="text-brand-gray">{step.description}</p>
+                            <p className="text-brand-gray-500">{step.description}</p>
                         </div>
                     </div>
                 ))}

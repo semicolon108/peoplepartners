@@ -49,7 +49,7 @@ export default function Footer() {
 
           {/* Section 2: Services */}
           <div className="footer-section">
-            <h3 className="mb-4 text-blue-400 font-medium">Our Services</h3>
+            <h3 className="mb-4 text-brand-blue-400 font-medium">Our Services</h3>
             {services.map((service) => (
               <Link
                 key={service.name}
@@ -63,7 +63,7 @@ export default function Footer() {
 
           {/* Section 3: Company */}
           <div className="footer-section">
-            <h3 className="mb-4 text-blue-400 font-medium">Company</h3>
+            <h3 className="mb-4 text-brand-blue-400 font-medium">Company</h3>
             {companyLinks.map((link) => (
               <Link
                 key={link.name}
@@ -89,7 +89,7 @@ export default function Footer() {
 
           {/* Section 4: Contact */}
           <div className="footer-section">
-            <h3 className="mb-4 text-blue-400 font-medium">
+            <h3 className="mb-4 text-brand-blue-400 font-medium">
               Contact Information
             </h3>
             <div className="text-slate-300 space-y-4">

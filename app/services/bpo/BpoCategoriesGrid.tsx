@@ -24,14 +24,14 @@ export default function BpoCategoriesGrid({ categories }: BpoCategoriesGridProps
                         <div className="w-12 h-12 bg-gradient-to-br from-brand-blue to-brand-blue-light text-white rounded-lg flex items-center justify-center flex-shrink-0">
                             {category.icon}
                         </div>
-                        <h3 className="font-semibold text-lg text-brand-blue-dark">
+                        <h3 className="font-semibold text-lg text-brand-blue-900">
                             {category.title}
                         </h3>
                     </div>
-                    <ul className="text-brand-gray text-sm space-y-2">
+                    <ul className="text-brand-gray-500 text-sm space-y-2">
                         {category.services.map((service) => (
                             <li key={service} className="flex items-start gap-2">
-                                <span className="text-brand-blue mt-1">▶</span>
+                                <span className="text-brand-blue-600 mt-1">▶</span>
                                 <span className="mt-1">{service}</span>
                             </li>
                         ))}

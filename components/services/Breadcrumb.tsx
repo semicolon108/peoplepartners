@@ -7,8 +7,8 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ pageTitle }: BreadcrumbProps) {
     return (
-        <section className="bg-brand-gray-light py-10 border-b border-slate-200">
-            <div className="container text-sm text-brand-gray">
+        <section className="bg-brand-gray-50 py-10 border-b border-slate-200">
+            <div className="container text-sm text-brand-gray-500">
                 <Link href="/" className="text-brand-blue-600 hover:underline">
                     Home
                 </Link>

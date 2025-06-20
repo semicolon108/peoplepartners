@@ -19,7 +19,7 @@ export default function FeaturesGrid({ features }: FeaturesGridProps) {
                         {feature.icon}
                     </div>
                     <h3 className="font-semibold text-lg mb-2 text-brand-blue-900">{feature.title}</h3>
-                    <p className="text-brand-gray text-sm">{feature.description}</p>
+                    <p className="text-brand-gray-500 text-sm">{feature.description}</p>
                 </div>
             ))}
         </div>

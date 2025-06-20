@@ -27,24 +27,24 @@ export default function VisaPage() {
             <main>
                 <section className="py-20 bg-white">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-dark">Navigate Lao Immigration with Confidence</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Navigate Lao Immigration with Confidence</h2>
                         <FeaturesGrid features={serviceData.features} />
                     </div>
                 </section>
-                {/* <section className="py-20 bg-brand-gray-light">
+                {/* <section className="py-20 bg-brand-gray-50">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-dark">What&apos;s Included</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">What&apos;s Included</h2>
                         <IncludedList items={serviceData.includedItems} />
                     </div>
                 </section> */}
 
                 <section className="py-20 bg-white">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-dark">Our Visa and Immigration Process</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Our Visa and Immigration Process</h2>
                         <ProcessTimeline steps={serviceData.processSteps} />
                     </div>
                 </section>
-                <section className="py-20 bg-brand-gray-light">
+                <section className="py-20 bg-brand-gray-50">
                     <div className="container">
                         <ValueProposition {...serviceData.valueProposition} />
                     </div>
