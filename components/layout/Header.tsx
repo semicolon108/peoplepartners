@@ -53,7 +53,7 @@ export default function Header() {
   const handleLinkClick = () => {
     setMobileMenuOpen(false);
     setServicesOpen(false);
-  };
+  }; 
 
   return (
     <header
