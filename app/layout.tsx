@@ -1,5 +1,6 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
+import { Analytics } from "@vercel/analytics/next"
 import { Noto_Sans } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
@@ -78,7 +79,10 @@ export default function RootLayout({
     <html lang="en" className={notoSans.variable}>
       <body className="font-sans antialiased bg-white text-slate-900 selection:bg-brand-blue/10">
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen">
+          {children}
+          <Analytics/>
+        </main>
         <Footer />
       </body>
     </html>
