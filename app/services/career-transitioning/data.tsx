@@ -53,9 +53,9 @@ export const serviceData = {
         title: "Career Development Packages",
         description: "Choose the package that best fits your career goals and budget. All packages include ongoing support and a satisfaction guarantee.",
         items: [
-            "CV & LinkedIn Package: $299",
-            "Complete Career Transition: $799",
-            "Executive Transition: $1,499",
+            "CV & LinkedIn Package",
+            "Complete Career Transition",
+            "Executive Transition",
             "All packages are fully customizable",
         ]
     },

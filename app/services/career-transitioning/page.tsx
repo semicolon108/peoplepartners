@@ -39,7 +39,7 @@ export default function CareerTransitioningPage() {
                 </section> */}
                 <section className="py-20 bg-white">
                     <div className="container">
-                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Our Payroll Process</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-brand-blue-900">Our Career Transition Process</h2>
                         <ProcessTimeline steps={serviceData.processSteps} />
                     </div>
                 </section>
