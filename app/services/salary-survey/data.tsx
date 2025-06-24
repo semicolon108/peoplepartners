@@ -53,9 +53,9 @@ export const serviceData = {
         title: "Salary Survey Packages",
         description: "Choose the package that best fits your organization's needs. All packages include detailed analysis and consultation support.",
         items: [
-            "Basic Industry Report: $599",
-            "Comprehensive Multi-Industry Analysis: $1,299",
-            "Custom Enterprise Survey: $2,499",
+            "Basic Industry Report: $XXX",
+            "Comprehensive Multi-Industry Analysis: $X,XXX",
+            "Custom Enterprise Survey: $X,XXX",
             "All packages include consultation sessions",
         ]
     },

@@ -1,8 +1,13 @@
 // components/services/Breadcrumb.tsx
 import Link from 'next/link';
 
+interface BreadcrumbPath {
+    name: string;
+    href: string;
+}
 interface BreadcrumbProps {
     pageTitle: string;
+    customPaths?: BreadcrumbPath[];
 }
 
 export default function Breadcrumb({ pageTitle }: BreadcrumbProps) {
