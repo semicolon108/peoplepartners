@@ -1,0 +1,76 @@
+Folder PATH listing
+Volume serial number is 6C48-F67F
+C:.
+│   error.tsx
+│   favicon.ico
+│   globals.css
+│   layout.tsx
+│   not-found.tsx
+│   opengraph-image.tsx
+│   page.tsx
+│   sitemap.ts
+│   tree.txt
+│   
+├───about
+│       data.tsx
+│       page.tsx
+│       
+├───api
+│   └───contact
+│           route.ts
+│           
+├───careers
+│   │   data.tsx
+│   │   JobListClient.tsx
+│   │   page.tsx
+│   │   
+│   └───[hash]
+│           JobDetailPage.tsx
+│           not-found.tsx
+│           page.tsx
+│           
+├───contact
+│       ContactForm.tsx
+│       data.tsx
+│       page.tsx
+│       
+└───services
+    │   config.ts
+    │   
+    ├───bpo
+    │       BpoCategoriesGrid.tsx
+    │       data.tsx
+    │       opengraph-image.tsx
+    │       page.tsx
+    │       
+    ├───career-transitioning
+    │       data.tsx
+    │       page.tsx
+    │       
+    ├───hr-consulting
+    │       data.tsx
+    │       page.tsx
+    │       
+    ├───payroll
+    │       data.tsx
+    │       page.tsx
+    │       
+    ├───peo
+    │       data.tsx
+    │       page.tsx
+    │       
+    ├───recruitment
+    │       data.tsx
+    │       page.tsx
+    │       
+    ├───salary-survey
+    │       data.tsx
+    │       page.tsx
+    │       
+    ├───visa
+    │       data.tsx
+    │       page.tsx
+    │       
+    └───[service]
+            opengraph-image.tsx
+            
