@@ -5,6 +5,7 @@ import { Noto_Sans } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // Optimized font configuration with better weight selection
 const notoSans = Noto_Sans({
@@ -73,6 +74,7 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
           <Analytics/>
+          <SpeedInsights />
         </main>
         <Footer />
       </body>
