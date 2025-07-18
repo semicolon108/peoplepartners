@@ -2,7 +2,7 @@
 import { MetadataRoute } from "next";
 
 // Replace with your actual domain
-const URL = "https://www.peoplepartnerslao.la";
+const URL = "https://www.peoplepartners.la/";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
