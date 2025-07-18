@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services/bpo",
     "/services/recruitment",
     "/services/career-transitioning",
+    "/services/salary-survey",
     "/services/hr-consulting",
     "/services/visa",
   ].map((route) => ({
