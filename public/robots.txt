@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.peoplepartnerslao.la/sitemap.xml
+Sitemap: https://www.peoplepartners.la/sitemap.xml
