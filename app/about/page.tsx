@@ -120,12 +120,13 @@ export default function AboutPage() {
                                     key={team.name}
                                     className="bg-white p-6 rounded-2xl shadow-lg text-center border border-slate-100 hover:shadow-xl transition-shadow duration-300"
                                 >
-                                    <div className="relative w-32 h-32 mx-auto mb-6">
+                                    <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-brand-blue-50">
                                         <Image
                                             src={team.image}
                                             alt={team.name}
                                             fill
-                                            className="rounded-full object-cover border-4 border-brand-blue-50"
+                                            className="object-cover"
+                                            style={{ objectPosition: "center 20%" }}
                                         />
                                     </div>
                                     <h3 className="text-lg font-semibold text-brand-blue-900">

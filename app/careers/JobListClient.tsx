@@ -7,8 +7,8 @@ import { MapPin, Clock, Briefcase, Search, Filter, X, ExternalLink } from 'lucid
 import Link from 'next/link';
 
 // Enhanced JobCard component with link to individual job page
-function JobCard({ job, isMobile }: { 
-    job: Job; 
+function JobCard({ job, isMobile }: {
+    job: Job;
     isMobile: boolean;
 }) {
     return (
@@ -16,7 +16,6 @@ function JobCard({ job, isMobile }: {
             href={`/careers/${job.hash}`}
             className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm block transition hover:shadow-md"
         >
-            {/* eslint-disable-next-line react/jsx-no-undef */}
             <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-brand-blue-700 to-brand-blue-500 text-white rounded-lg flex items-center justify-center mb-4">
                     {job.icon}
@@ -57,7 +56,7 @@ export default function JobListClient({ initialJobs }: { initialJobs: Job[] }) {
         const checkMobile = () => {
             setIsMobile(window.innerWidth < 768);
         };
-        
+
         checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
@@ -116,7 +115,7 @@ export default function JobListClient({ initialJobs }: { initialJobs: Job[] }) {
                             className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent"
                         />
                     </div>
-                    
+
                     <div className="flex gap-2 items-center">
                         <Filter className="text-brand-gray-400 w-5 h-5 sm:hidden" />
                         <select

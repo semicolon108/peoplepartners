@@ -29,7 +29,7 @@ export default function ContactForm() {
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
     const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
-    const [countryCode, setCountryCode] = useState(countryCodes[0].code);
+    const [countryCode, setCountryCode] = useState(countryCodes[0]?.code || '+856');
 
     // Client-side validation
     const validateForm = (data: ContactFormData): Record<string, string> => {
@@ -119,9 +119,8 @@ export default function ContactForm() {
                             name="firstName"
                             required
                             disabled={status === 'sending'}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${
-                                validationErrors.firstName ? 'border-red-500' : 'border-slate-300'
-                            }`}
+                            className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${validationErrors.firstName ? 'border-red-500' : 'border-slate-300'
+                                }`}
                         />
                         {validationErrors.firstName && (
                             <p className="mt-1 text-sm text-red-600">{validationErrors.firstName}</p>
@@ -137,9 +136,8 @@ export default function ContactForm() {
                             name="lastName"
                             required
                             disabled={status === 'sending'}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${
-                                validationErrors.lastName ? 'border-red-500' : 'border-slate-300'
-                            }`}
+                            className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${validationErrors.lastName ? 'border-red-500' : 'border-slate-300'
+                                }`}
                         />
                         {validationErrors.lastName && (
                             <p className="mt-1 text-sm text-red-600">{validationErrors.lastName}</p>
@@ -158,9 +156,8 @@ export default function ContactForm() {
                         name="email"
                         required
                         disabled={status === 'sending'}
-                        className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${
-                            validationErrors.email ? 'border-red-500' : 'border-slate-300'
-                        }`}
+                        className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${validationErrors.email ? 'border-red-500' : 'border-slate-300'
+                            }`}
                     />
                     {validationErrors.email && (
                         <p className="mt-1 text-sm text-red-600">{validationErrors.email}</p>
@@ -190,9 +187,8 @@ export default function ContactForm() {
                             id="phone"
                             name="phone"
                             disabled={status === 'sending'}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${
-                                validationErrors.phone ? 'border-red-500' : 'border-slate-300'
-                            }`}
+                            className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${validationErrors.phone ? 'border-red-500' : 'border-slate-300'
+                                }`}
                         />
                     </div>
                     {validationErrors.phone && (
@@ -246,9 +242,8 @@ export default function ContactForm() {
                         rows={5}
                         disabled={status === 'sending'}
                         placeholder="Tell us about your HR needs and how we can help..."
-                        className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed resize-none ${
-                            validationErrors.message ? 'border-red-500' : 'border-slate-300'
-                        }`}
+                        className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed resize-none ${validationErrors.message ? 'border-red-500' : 'border-slate-300'
+                            }`}
                     />
                     {validationErrors.message && (
                         <p className="mt-1 text-sm text-red-600">{validationErrors.message}</p>

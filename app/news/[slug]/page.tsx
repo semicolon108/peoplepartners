@@ -99,12 +99,12 @@ export default async function NewsPost({ params }: PageProps) {
                         <p className="text-brand-gray-600 mb-8 max-w-2xl mx-auto">
                             Our consultants are ready to help you navigate these regulations. Book a free consultation today.
                         </p>
-                        <a
-                            href="/"
+                        <Link
+                            href="/contact"
                             className="inline-block px-8 py-3 bg-brand-blue-600 text-white font-semibold rounded-full hover:bg-brand-blue-700 transition-colors shadow-lg hover:shadow-xl"
                         >
                             Contact Us
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </main>

@@ -11,6 +11,8 @@ export const size = {
 }
 export const contentType = 'image/png'
 
+
+/* eslint-disable @next/next/no-img-element */
 export default async function Image({ params }: { params: { service: string } }) {
     const service = serviceConfig[params.service as keyof typeof serviceConfig] || serviceConfig.bpo
 
@@ -97,6 +99,7 @@ export default async function Image({ params }: { params: { service: string } })
                         >
                             <img
                                 src={LOGO_BASE64}
+                                alt="People Partners Lao Logo"
                                 style={{
                                     width: '100%',
                                     height: '100%',
