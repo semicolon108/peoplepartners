@@ -65,19 +65,19 @@ const clientLogos = [
         width: 180,
         height: 80,
     },
-        {
+    {
         src: "/ANZ-Logo-2009.svg",
         alt: "ANZ Logo",
         width: 180,
         height: 80,
     },
-        {
+    {
         src: "/iipay.svg",
         alt: "iipay Logo",
         width: 180,
         height: 80,
     },
-        {
+    {
         src: "/jice.svg",
         alt: "jice Logo",
         width: 180,
@@ -117,12 +117,12 @@ export default function Trust() {
                 </p>
 
                 {/* Sliding Logo Carousel */}
-                <div className="relative overflow-hidden">
-                    <div className="flex animate-slide-left-infinite">
+                <div className="relative overflow-hidden w-full max-w-6xl mx-auto">
+                    <div className="flex w-max animate-slide-left-infinite hover:[animation-play-state:paused]">
                         {duplicatedLogos.map((logo, index) => (
                             <div
                                 key={`${logo.src}-${index}`}
-                                className="flex-shrink-0 mx-8 flex items-center justify-center h-20 w-48"
+                                className="flex-shrink-0 mx-4 md:mx-8 flex items-center justify-center h-16 w-32 md:w-40"
                             >
                                 {!imageErrors[logo.src] ? (
                                     <Image
@@ -130,14 +130,13 @@ export default function Trust() {
                                         alt={logo.alt}
                                         width={logo.width}
                                         height={logo.height}
-                                        className="max-h-16 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+                                        className="max-h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 hover:scale-110"
                                         onError={() => handleImageError(logo.src)}
                                         onLoad={() => handleImageLoad(logo.src)}
-                                        priority={index < clientLogos.length}
                                     />
                                 ) : (
-                                    <div className="flex items-center justify-center h-16 w-32 bg-brand-gray-100 rounded text-brand-gray-400 text-sm">
-                                        Logo unavailable
+                                    <div className="flex items-center justify-center h-12 w-24 bg-brand-gray-100 rounded text-brand-gray-400 text-xs">
+                                        N/A
                                     </div>
                                 )}
                             </div>

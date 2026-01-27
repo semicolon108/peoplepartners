@@ -3,12 +3,23 @@
 
 import { useState } from 'react';
 import { servicesOfInterest } from './data';
+import { isValidPhoneNumber } from 'libphonenumber-js';
+
+// Add country codes (you can expand this list)
+const countryCodes = [
+    { code: '+856', label: 'Laos (+856)' },
+    { code: '+66', label: 'Thailand (+66)' },
+    { code: '+84', label: 'Vietnam (+84)' },
+    { code: '+1', label: 'USA (+1)' },
+    // Add more as needed
+];
 
 interface ContactFormData {
     firstName: string;
     lastName: string;
     email: string;
     phone: string;
+    countryCode: string;
     company: string;
     service: string;
     message: string;
@@ -18,6 +29,7 @@ export default function ContactForm() {
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
     const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+    const [countryCode, setCountryCode] = useState(countryCodes[0].code);
 
     // Client-side validation
     const validateForm = (data: ContactFormData): Record<string, string> => {
@@ -32,6 +44,12 @@ export default function ContactForm() {
         }
         if (!data.message.trim()) errors.message = 'Message is required';
         if (data.message.length > 2000) errors.message = 'Message is too long (max 2000 characters)';
+        if (data.phone) {
+            const fullPhone = `${data.countryCode}${data.phone}`;
+            if (!isValidPhoneNumber(fullPhone)) {
+                errors.phone = 'Please enter a valid phone number';
+            }
+        }
 
         return errors;
     };
@@ -44,6 +62,7 @@ export default function ContactForm() {
 
         const formData = new FormData(event.target as HTMLFormElement);
         const data = Object.fromEntries(formData.entries()) as unknown as ContactFormData;
+        data.countryCode = countryCode; // Add country code to data
 
         // Client-side validation
         const errors = validateForm(data);
@@ -148,18 +167,37 @@ export default function ContactForm() {
                     )}
                 </div>
 
-                {/* Phone Field */}
+                {/* Phone Field with Country Code */}
                 <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-1">
                         Phone Number
                     </label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        disabled={status === 'sending'}
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                    />
+                    <div className="flex gap-2">
+                        <select
+                            id="countryCode"
+                            name="countryCode"
+                            value={countryCode}
+                            onChange={e => setCountryCode(e.target.value)}
+                            disabled={status === 'sending'}
+                            className="px-2 py-2 border border-slate-300 rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {countryCodes.map(c => (
+                                <option key={c.code} value={c.code}>{c.label}</option>
+                            ))}
+                        </select>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            disabled={status === 'sending'}
+                            className={`w-full px-4 py-2 border rounded-lg focus:ring-brand-blue-700 focus:border-brand-blue-700 disabled:opacity-50 disabled:cursor-not-allowed ${
+                                validationErrors.phone ? 'border-red-500' : 'border-slate-300'
+                            }`}
+                        />
+                    </div>
+                    {validationErrors.phone && (
+                        <p className="mt-1 text-sm text-red-600">{validationErrors.phone}</p>
+                    )}
                 </div>
 
                 {/* Company Field */}

@@ -2,6 +2,7 @@ import { BookOpen, Briefcase, Building } from 'lucide-react';
 import Breadcrumb from '@/components/services/Breadcrumb';
 import PageHero from '@/components/shared/PageHero';
 import JobListClient from './JobListClient';
+import CandidateTestimonials from '@/components/careers/CandidateTestimonials';
 
 export interface Job {
     id: number;
@@ -94,7 +95,7 @@ export async function getManatalJobs(): Promise<Job[]> {
                 icon: job.department?.name === 'Consulting' ? <BookOpen /> :
                     (job.department?.name === 'Business Process Outsourcing' ? <Building /> : <Briefcase />),
             };
-        });
+        })//.sort((a, b) => b.id - a.id); // Sort descending by id (newest first)
 
         return formattedJobs;
 
@@ -116,9 +117,28 @@ export default async function CareersPage() {
             />
             <main className="py-20 bg-brand-gray-50">
                 <div className="container">
+                    <div className="mb-12 bg-white rounded-2xl p-8 border border-brand-gray-200 shadow-soft flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue-50 rounded-full -mr-32 -mt-32 opacity-50 pointer-events-none"></div>
+                        <div className="relative z-10">
+                            <h3 className="text-xl font-bold text-brand-gray-900 mb-2">
+                                Not sure which role fits you best?
+                            </h3>
+                            <p className="text-brand-gray-600">
+                                Select your experience level and let us guide you to the right opportunity.
+                            </p>
+                        </div>
+                        <a
+                            href="/apply"
+                            className="relative z-10 whitespace-nowrap px-6 py-3 bg-brand-blue-600 hover:bg-brand-blue-700 text-white font-semibold rounded-lg transition-colors shadow-md hover:shadow-lg"
+                        >
+                            Start Here
+                        </a>
+                    </div>
+
                     <JobListClient initialJobs={jobs} />
                 </div>
             </main>
+            <CandidateTestimonials />
         </div>
     );
 }

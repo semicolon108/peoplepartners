@@ -5,6 +5,7 @@ import CTA from '@/components/shared/CTA';
 import { serviceData } from './data';
 import type { Metadata } from 'next';
 import Testimonials from '@/components/shared/Testimonials';
+import Image from 'next/image';
 
 
 export const metadata: Metadata = {
@@ -117,15 +118,20 @@ export default function AboutPage() {
                             {serviceData.teamSections.map((team) => (
                                 <div
                                     key={team.name}
-                                    className="bg-white p-6 rounded-2xl shadow-lg text-center border border-slate-100"
+                                    className="bg-white p-6 rounded-2xl shadow-lg text-center border border-slate-100 hover:shadow-xl transition-shadow duration-300"
                                 >
-                                    <div className="w-24 h-24 bg-gradient-to-br from-brand-blue-700 to-brand-blue-500 text-white rounded-full mx-auto flex items-center justify-center mb-4 text-4xl">
-                                        {team.icon}
+                                    <div className="relative w-32 h-32 mx-auto mb-6">
+                                        <Image
+                                            src={team.image}
+                                            alt={team.name}
+                                            fill
+                                            className="rounded-full object-cover border-4 border-brand-blue-50"
+                                        />
                                     </div>
                                     <h3 className="text-lg font-semibold text-brand-blue-900">
                                         {team.name}
                                     </h3>
-                                    <p className="text-brand-blue-400 font-medium mb-3 text-sm">
+                                    <p className="text-brand-blue-600 font-medium mb-3 text-sm">
                                         {team.role}
                                     </p>
                                     <p className="text-brand-gray-500 text-xs leading-relaxed">

@@ -1,5 +1,5 @@
 
-import { Trophy, Target, Star, Globe, ShieldCheck, HandCoins, HeartHandshake, Rocket, Handshake, Lock, Users, Building, PenSquare, Phone } from 'lucide-react';
+import { Trophy, Target, Star, Globe, ShieldCheck, HandCoins, HeartHandshake, Rocket, Handshake, Lock } from 'lucide-react';
 
 // Data for the entire page, centralized for easy maintenance
 export const serviceData = {
@@ -25,10 +25,13 @@ export const serviceData = {
         { icon: <Lock />, title: "Data Security & Privacy", description: "Bank-level security protocols, encrypted data storage, and strict confidentiality measures protect your sensitive HR info." },
     ],
     teamSections: [
-        { icon: <Users />, name: "Leadership Team", role: "Executive Management", bio: "Seasoned executives with extensive experience in Lao business operations, regulatory compliance, and international HR practices." },
-        { icon: <PenSquare />, name: "Payroll Specialists", role: "5 Dedicated Experts", bio: "Certified payroll professionals with deep knowledge of Lao tax laws, social security regulations, and multi-currency processing." },
-        { icon: <Building />, name: "HR Consultants", role: "Strategic Advisors", bio: "Expert consultants specializing in labor law compliance, policy development, and organizational development in Laos." },
-        { icon: <Phone />, name: "Client Success Team", role: "Dedicated Support", bio: "Customer-focused professionals providing personalized support, quick response times, and proactive account management." },
+        { image: "/team/1. keovisouk.jpg", name: "Keovisouk Dalasane", role: "Founder and Managing Director", bio: "Leading the vision and strategy for People Partners Lao." },
+        { image: "/team/14. Phoutthalak.jpg", name: "Phoutthalak Phansalithong", role: "Acting General Manager", bio: "Overseeing daily operations and ensuring service excellence." },
+        { image: "/team/2. Toui.jpg", name: "Phetsamone Dalasane", role: "Chief Financial Officer", bio: "Managing financial strategy and compliance." },
+        { image: "/team/4.khaek.jpg", name: "Douangnaly Keokachay", role: "Hiring Solution & Staff Outsourcing Team Leader", bio: "Expert in mass recruitment and outsourcing solutions." },
+        { image: "/team/13. Toutou.jpg", name: "Phonethida Thorchamlernshouk", role: "Recruitment Specialist", bio: "Specializing in talent acquisition and candidate placement." },
+        { image: "/team/15. larnoy.jpg", name: "Larnoy Pholavanh", role: "EOR and Payroll Specialist", bio: "Ensuring accurate and timely payroll for our clients." },
+        { image: "/team/16. Tik.jpg", name: "Phitsamay Sivilay", role: "Recruitment Specialist", bio: "Connecting top talent with leading organizations." },
     ],
     testimonials: [
         { quote: "People Partners Lao made our expansion into Laos seamless. Their deep local knowledge combined with international standards gave us the confidence to focus on our core business.", author: "Regional Manager", company: "International Trading Company" },

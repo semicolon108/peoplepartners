@@ -12,14 +12,22 @@ export default function Hero() {
                     Your Expert HR Partner in Laos
                 </h1>
                 <p className="max-w-3xl mx-auto text-lg text-slate-300 mb-8">
-                    Compliant. Efficient. Reliable. We combine unmatched local expertise with international service standards to power your business growth in Laos.
+                    Compliant. Efficient. Reliable. We provide unmatched HR solutions for businesses and help professionals find their dream careers in Laos.
                 </p>
-                <Link
-                    href="/contact#consultation"
-                    className="inline-block bg-gradient-to-r from-brand-blue-700 to-brand-blue-500 text-white font-semibold px-8 py-3 rounded-lg text-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-                >
-                    Request a Free Proposal
-                </Link>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <Link
+                        href="/contact#consultation"
+                        className="w-full sm:w-auto bg-gradient-to-r from-brand-blue-700 to-brand-blue-500 text-white font-semibold px-8 py-3 rounded-lg text-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+                    >
+                        Request a Free Proposal
+                    </Link>
+                    <Link
+                        href="/apply"
+                        className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-3 rounded-lg text-lg hover:bg-white/20 hover:-translate-y-1 transition-all duration-300"
+                    >
+                        Drop Your CV
+                    </Link>
+                </div>
                 <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 mt-16">
                     <div className="text-center">
                         <div className="text-4xl font-bold text-brand-blue-50">2011</div>
