@@ -95,7 +95,7 @@ export async function getManatalJobs(): Promise<Job[]> {
                 icon: job.department?.name === 'Consulting' ? <BookOpen /> :
                     (job.department?.name === 'Business Process Outsourcing' ? <Building /> : <Briefcase />),
             };
-        })//.sort((a, b) => b.id - a.id); // Sort descending by id (newest first)
+        }).sort((a, b) => b.id - a.id); // Sort descending by id (newest first)
 
         return formattedJobs;
 

@@ -9,11 +9,14 @@ interface SelectionCardProps {
     icon: React.ReactNode;
     href: string;
     colorClass: string;
+    target?: string;
 }
 
-const SelectionCard = ({ title, description, icon, href, colorClass }: SelectionCardProps) => (
+const SelectionCard = ({ title, description, icon, href, colorClass, target }: SelectionCardProps) => (
     <Link
         href={href}
+        target={target} // <--- This connects the prop to the actual link
+        rel={target === "_blank" ? "noopener noreferrer" : undefined} // <--- Safety best practice for new tabs
         className="group relative flex flex-col items-center p-8 bg-white rounded-2xl shadow-soft hover:shadow-hard border border-brand-gray-100 hover:border-brand-blue-200 transition-all duration-300 transform hover:-translate-y-2"
     >
         <div className={`p-4 rounded-full ${colorClass} text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
@@ -37,14 +40,14 @@ export default function ApplyPage() {
             title: "Executive & C-Level",
             description: "Leadership roles for experienced executives driving business strategy and growth.",
             icon: <Award size={32} />,
-            href: "#", // Placeholder
+            href: "https://www.careers-page.com/ppl/job/8X3Y878V/apply",
             colorClass: "bg-gradient-to-br from-amber-500 to-amber-600",
         },
         {
             title: "Mid & Senior Level",
             description: "Specialized positions for professionals ready to take the next step in their career.",
             icon: <Briefcase size={32} />,
-            href: "#", // Placeholder
+            href: "https://www.careers-page.com/ppl/job/5WYVX473/apply",
             colorClass: "bg-gradient-to-br from-brand-blue-500 to-brand-blue-600",
         },
 
@@ -52,7 +55,7 @@ export default function ApplyPage() {
             title: "Entry Level & Operations",
             description: "Start your journey with us. No English language requirement for these roles.",
             icon: <UserPlus size={32} />,
-            href: "#", // Placeholder
+            href: "https://www.careers-page.com/ppl/job/L79W8YW5/apply", // Placeholder
             colorClass: "bg-gradient-to-br from-emerald-500 to-emerald-600",
         },
     ];
@@ -69,7 +72,7 @@ export default function ApplyPage() {
                 <div className="container px-4 md:px-6">
                     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
                         {cards.map((card, index) => (
-                            <SelectionCard key={index} {...card} />
+                            <SelectionCard key={index} {...card} target="_blank" />
                         ))}
                     </div>
 

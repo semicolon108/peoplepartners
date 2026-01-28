@@ -4,11 +4,7 @@ import { Metadata } from 'next';
 import { getManatalJobs } from '../page';
 import JobDetailPage from './JobDetailPage';
 
-interface PageProps {
-    params: {
-        hash: string;
-    };
-}
+
 
 // Generate static params for all jobs
 export async function generateStaticParams() {
@@ -19,9 +15,10 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ hash: string }> }): Promise<Metadata> {
+    const { hash } = await params;
     const jobs = await getManatalJobs();
-    const job = jobs.find((j) => j.hash === params.hash);
+    const job = jobs.find((j) => j.hash === hash);
 
     if (!job) {
         return {
@@ -46,9 +43,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
 }
 
-export default async function JobPage({ params }: PageProps) {
+export default async function JobPage({ params }: { params: Promise<{ hash: string }> }) {
+    const { hash } = await params;
     const jobs = await getManatalJobs();
-    const job = jobs.find((j) => j.hash === params.hash);
+    const job = jobs.find((j) => j.hash === hash);
 
     if (!job) {
         notFound();
