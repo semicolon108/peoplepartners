@@ -127,6 +127,8 @@ export default function AboutPage() {
                                             fill
                                             className="object-cover"
                                             style={{ objectPosition: "center 20%" }}
+
+
                                         />
                                     </div>
                                     <h3 className="text-lg font-semibold text-brand-blue-900">
