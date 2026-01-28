@@ -71,11 +71,12 @@ export default function Header() {
             width={150}
             height={40}
             priority
+            className="w-auto h-16"
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <ul className="hidden lg:flex items-center lg:gap-4 xl:gap-8 lg:text-sm xl:text-base">
+        <ul className="hidden lg:flex items-center lg:gap-2 xl:gap-8 lg:text-sm xl:text-base">
           {navLinks.slice(0, 1).map((link) => (
             <li key={link.name}>
               <Link href={link.href} className="font-medium text-slate-700 hover:text-brand-blue-600 transition-colors">
@@ -108,7 +109,7 @@ export default function Header() {
           <li>
             <Link
               href="/contact#consultation"
-              className="bg-gradient-to-r from-brand-blue-700 to-brand-blue-500 text-white font-semibold px-6 py-2 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all"
+              className="bg-gradient-to-r from-brand-blue-700 to-brand-blue-500 text-white font-semibold lg:px-4 xl:px-6 py-2 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all text-sm xl:text-base whitespace-nowrap"
             >
               Get Consultation
             </Link>
