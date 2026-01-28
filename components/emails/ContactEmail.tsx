@@ -1,6 +1,3 @@
-// components/emails/ContactEmail.tsx
-
-import React from 'react';
 
 interface ContactEmailProps {
     firstName: string;
