@@ -129,6 +129,7 @@ export default function AboutPage() {
                                             style={{ objectPosition: "center 20%" }}
                                         />
                                     </div>
+
                                     <h3 className="text-lg font-semibold text-brand-blue-900">
                                         {team.name}
                                     </h3>
