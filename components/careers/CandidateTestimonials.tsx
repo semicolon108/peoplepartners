@@ -38,7 +38,7 @@ export default function CandidateTestimonials() {
                             </div>
                             <div className="relative z-10">
                                 <p className="text-brand-gray-700 leading-relaxed mb-6">
-                                    "{item.quote}"
+                                    &quot;{item.quote}&quot;
                                 </p>
                                 <div>
                                     <div className="font-bold text-brand-blue-900">{item.author}</div>

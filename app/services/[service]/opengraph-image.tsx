@@ -12,7 +12,7 @@ export const size = {
 export const contentType = 'image/png'
 
 
-/* eslint-disable @next/next/no-img-element */
+/* eslint-disable-next-line @next/next/no-img-element */
 export default async function Image({ params }: { params: { service: string } }) {
     const service = serviceConfig[params.service as keyof typeof serviceConfig] || serviceConfig.bpo
 

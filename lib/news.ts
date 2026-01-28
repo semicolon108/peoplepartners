@@ -63,7 +63,7 @@ export function getNewsBySlug(slug: string): NewsPost | null {
             content: matterResult.content,
             ...(matterResult.data as { title: string; date: string; category: string; excerpt: string; author: string }),
         };
-    } catch (error) {
+    } catch {
         return null; // Return null if file doesn't exist
     }
 }

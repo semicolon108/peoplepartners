@@ -10,7 +10,7 @@ export const size = {
 }
 export const contentType = 'image/png'
 
-/* eslint-disable @next/next/no-img-element */
+/* eslint-disable-next-line @next/next/no-img-element */
 export default async function Image() {
     return new ImageResponse(
         (
