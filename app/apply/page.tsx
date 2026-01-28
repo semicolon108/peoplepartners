@@ -47,6 +47,7 @@ export default function ApplyPage() {
             href: "#", // Placeholder
             colorClass: "bg-gradient-to-br from-brand-blue-500 to-brand-blue-600",
         },
+
         {
             title: "Entry Level & Operations",
             description: "Start your journey with us. No English language requirement for these roles.",
