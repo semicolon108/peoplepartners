@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-noto-sans)", "system-ui", "sans-serif"],
+        sans: ["var(--font-outfit)", "var(--font-noto-lao)", "system-ui", "sans-serif"],
       },
       colors: {
         brand: {

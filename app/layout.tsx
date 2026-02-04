@@ -1,19 +1,26 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
 import { Analytics } from "@vercel/analytics/next"
-import { Noto_Sans } from 'next/font/google';
+import { Noto_Sans_Lao_Looped, Outfit } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
-// Optimized font configuration with better weight selection
-const notoSans = Noto_Sans({
+// Google Sans alternative (Geometric Sans)
+const outfit = Outfit({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
-  variable: '--font-noto-sans',
-  preload: true, // Preload for better performance
+  variable: '--font-outfit',
+});
+
+// Noto Sans Lao Loop for Lao text
+const notoSansLaoLoop = Noto_Sans_Lao_Looped({
+  subsets: ['lao'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  display: 'swap',
+  variable: '--font-noto-lao',
+  adjustFontFallback: false, // Essential for Lao Loop script sometimes
 });
 
 // Enhanced metadata with structured data
@@ -42,7 +49,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-openGraph: {
+  openGraph: {
     title: 'People Partners Lao - Your Expert HR Partner in Laos',
     description: 'Compliant. Efficient. Reliable. We combine unmatched local expertise with international service standards to power your business growth in Laos.',
     url: 'https://peoplepartners.la',
@@ -68,12 +75,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={notoSans.variable}>
+    <html lang="en" className={`${outfit.variable} ${notoSansLaoLoop.variable}`}>
       <body className="font-sans antialiased bg-white text-slate-900 selection:bg-brand-blue/10">
         <Header />
         <main className="min-h-screen">
           {children}
-          <Analytics/>
+          <Analytics />
           <SpeedInsights />
         </main>
         <Footer />

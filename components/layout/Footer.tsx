@@ -34,12 +34,13 @@ export default function Footer() {
                 width={150}
                 height={40}
                 priority
+                className="w-[150px] h-auto"
               />
             </Link>
             <div className="mt-4 text-slate-300">
               <strong className="text-white">📍 Address:</strong>
               <br />
-              1st Floor, 108Hill Building 
+              1st Floor, 108Hill Building
               <br />
               Dongpaina Road, Saphanthong Village, Sisattanak District
               <br />

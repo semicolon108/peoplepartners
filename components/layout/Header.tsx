@@ -72,6 +72,7 @@ export default function Header() {
             height={40}
             priority
             className="w-auto h-16"
+            style={{ width: 'auto' }}
           />
         </Link>
 
