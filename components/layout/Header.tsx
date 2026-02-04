@@ -78,6 +78,7 @@ export default function Header() {
 
 
 
+
         {/* Desktop Navigation */}
         <ul className="hidden lg:flex items-center lg:gap-2 xl:gap-8 lg:text-sm xl:text-base">
           {navLinks.slice(0, 1).map((link) => (
