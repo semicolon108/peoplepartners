@@ -16,6 +16,7 @@ const services = [
 const companyLinks = [
   { name: "Why Choose Us?", href: "/about" },
   { name: "Opening Positions", href: "/careers" },
+  // { name: "Highlight Candidates", href: "/candidates" }, // Hidden for production
   { name: "Contact Us", href: "/contact" },
   { name: "Free Consultation", href: "/contact#consultation" },
 ];

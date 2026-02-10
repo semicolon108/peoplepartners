@@ -1,24 +1,9 @@
 // app/api/contact/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { contactFormRateLimit } from "@/lib/rate-limit";
 
-// Email configuration for peoplepartners.la domain
-const createTransporter = () => {
-    return nodemailer.createTransport({
-        host: process.env.SMTP_HOST || 'mail.peoplepartners.la', // Your 108.jobs mail server
-        port: parseInt(process.env.SMTP_PORT || '587'),
-        secure: process.env.SMTP_SECURE === 'true', // false for 587, true for 465
-        auth: {
-            user: process.env.SMTP_USER, 
-            pass: process.env.SMTP_PASSWORD, 
-        },
-        tls: {
-            rejectUnauthorized: false // May be needed for some hosting providers
-        }
-    });
-};
+// Email configuration removed (using Microsoft Graph)
 
 // Improved validation function with sanitization
 interface FormData {
@@ -100,6 +85,11 @@ const createEmailHTML = (formData: FormData) => {
   `;
 };
 
+// ... (imports)
+import { sendEmailGraph } from "@/lib/microsoftGraph";
+
+// ... (helper functions for validation and sanitization remain the same)
+
 export async function POST(req: NextRequest) {
     try {
         // Apply rate limiting
@@ -107,7 +97,7 @@ export async function POST(req: NextRequest) {
         if (!rateLimitResult.success) {
             return NextResponse.json(
                 { error: "Too many requests. Please try again later." },
-                { 
+                {
                     status: 429,
                     headers: {
                         'Retry-After': Math.ceil((rateLimitResult.resetTime! - Date.now()) / 1000).toString()
@@ -130,23 +120,18 @@ export async function POST(req: NextRequest) {
         // Use sanitized data
         const sanitizedData = validation.data!;
         const { firstName, lastName, email } = sanitizedData;
-
-        // Create transporter based on environment configuration
-        const transporter = createTransporter();
+        const recipientEmail = process.env.TO_EMAIL || 'info@peoplepartners.la';
 
         // Email options
-        const mailOptions = {
-            from: process.env.FROM_EMAIL || `"Contact Form" <noreply@peoplepartnerslao.com>`,
-            to: process.env.TO_EMAIL || 'info@peoplepartnerslao.com',
+        const emailData = {
+            to: recipientEmail,
             subject: `New Contact Form Submission from ${firstName} ${lastName}`,
-            html: createEmailHTML(sanitizedData),
-            replyTo: email, // Allow easy reply to the form submitter
+            body: createEmailHTML(sanitizedData),
+            replyTo: email,
         };
 
-        // Send email
-        const info = await transporter.sendMail(mailOptions);
-
-        console.log(`Email sent successfully! Message ID: ${info.messageId}`);
+        // Send email via Microsoft Graph
+        await sendEmailGraph(emailData);
 
         return NextResponse.json(
             { message: "Email sent successfully!" },
@@ -156,20 +141,10 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         console.error("Email sending error:", error);
 
-        // More specific error handling
-        if (error instanceof Error) {
-            if (error.message.includes('authentication')) {
-                return NextResponse.json(
-                    { error: "Email authentication failed. Please check configuration." },
-                    { status: 500 }
-                );
-            }
-            if (error.message.includes('network')) {
-                return NextResponse.json(
-                    { error: "Network error. Please try again later." },
-                    { status: 503 }
-                );
-            }
+        // Fallback for simulation if credentials are completely missing in dev
+        if (process.env.NODE_ENV === 'development' && (!process.env.AZURE_CLIENT_ID || !process.env.AZURE_CLIENT_SECRET)) {
+            console.warn("DEV MODE: Azure credentials missing. Simulating success.");
+            return NextResponse.json({ message: "Email simulation successful" }, { status: 200 });
         }
 
         return NextResponse.json(
