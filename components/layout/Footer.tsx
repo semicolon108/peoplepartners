@@ -17,6 +17,7 @@ const companyLinks = [
   { name: "Why Choose Us?", href: "/about" },
   { name: "Opening Positions", href: "/careers" },
   { name: "Highlight Candidates", href: "/candidates" },
+  { name: 'Personality Assessment', href: '/career-transitioning/riasec' },
   { name: "Contact Us", href: "/contact" },
   { name: "Free Consultation", href: "/contact#consultation" },
 ];

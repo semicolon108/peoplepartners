@@ -3,39 +3,52 @@
 
 import { useState, useEffect } from 'react';
 import type { Job } from './page';
-import { MapPin, Clock, Briefcase, Search, Filter, X, ExternalLink } from 'lucide-react';
+import { MapPin, Clock, Briefcase, Search, Filter, X, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-// Enhanced JobCard component with link to individual job page
-function JobCard({ job, isMobile }: {
-    job: Job;
-    isMobile: boolean;
-}) {
+// Enhanced JobCard matching CandidateCard style
+function JobCard({ job }: { job: Job }) {
     return (
         <Link
             href={`/careers/${job.hash}`}
-            className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm block transition hover:shadow-md"
+            className="flex flex-col h-full bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 group overflow-hidden"
         >
-            <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-brand-blue-700 to-brand-blue-500 text-white rounded-lg flex items-center justify-center mb-4">
-                    {job.icon}
+            <div className="p-6 flex flex-col flex-grow">
+                {/* Icon & Dept */}
+                <div className="flex justify-between items-start mb-4">
+                    <div className="w-12 h-12 bg-brand-blue-50 text-brand-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-brand-blue-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                        {job.icon}
+                    </div>
+                    <span className="inline-block px-3 py-1 bg-gray-50 text-gray-600 text-xs font-bold rounded-lg tracking-wide border border-gray-100">
+                        {job.department}
+                    </span>
                 </div>
-                <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-lg mb-2 text-brand-blue-900">{job.title}</h4>
-                    <p className="text-brand-gray-500 text-sm mb-2">{job.department}</p>
-                    {!isMobile && (
-                        <div className="flex flex-wrap items-center gap-3 text-xs text-brand-gray-500 mb-2">
-                            <span className="flex items-center gap-1">
-                                <MapPin size={12} /> {job.location}
-                            </span>
-                            <span className="flex items-center gap-1">
-                                <Clock size={12} /> {job.type}
-                            </span>
-                        </div>
-                    )}
-                    {!isMobile && (
-                        <ExternalLink size={16} className="text-brand-gray-400 group-hover:text-brand-blue-500 transition-colors flex-shrink-0 mt-1" />
-                    )}
+
+                {/* Title */}
+                <h4 className="font-bold text-xl text-gray-900 leading-tight mb-4 group-hover:text-brand-blue-600 transition-colors line-clamp-2">
+                    {job.title}
+                </h4>
+
+                {/* Tags */}
+                <div className="mt-auto space-y-2.5">
+                    <div className="flex items-center gap-2.5 text-sm text-gray-500">
+                        <MapPin size={16} className="text-gray-400" />
+                        {job.location}
+                    </div>
+                    <div className="flex items-center gap-2.5 text-sm text-gray-500">
+                        <Clock size={16} className="text-gray-400" />
+                        {job.type}
+                    </div>
+                </div>
+            </div>
+
+            {/* Footer Action */}
+            <div className="p-4 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between group-hover:bg-brand-blue-50/30 transition-colors">
+                <span className="text-sm font-bold text-gray-600 group-hover:text-brand-blue-700 transition-colors">
+                    View Position
+                </span>
+                <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 group-hover:border-brand-blue-300 group-hover:text-brand-blue-600 group-hover:translate-x-1 transition-all shadow-sm">
+                    <ArrowRight size={16} />
                 </div>
             </div>
         </Link>
@@ -45,22 +58,10 @@ function JobCard({ job, isMobile }: {
 export default function JobListClient({ initialJobs }: { initialJobs: Job[] }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedDepartment, setSelectedDepartment] = useState('');
-    const [isMobile, setIsMobile] = useState(false);
 
     // Pagination state
     const [currentPage, setCurrentPage] = useState(1);
     const jobsPerPage = 12; // Change as needed
-
-    // Check if mobile on mount and resize
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
 
     // Filter jobs based on search and department
     const filteredJobs = initialJobs.filter(job => {
@@ -167,7 +168,6 @@ export default function JobListClient({ initialJobs }: { initialJobs: Job[] }) {
                             <JobCard
                                 key={job.id}
                                 job={job}
-                                isMobile={isMobile}
                             />
                         ))}
                     </div>

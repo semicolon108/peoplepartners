@@ -87,6 +87,7 @@ const createEmailHTML = (formData: FormData) => {
 
 // ... (imports)
 import { sendEmailGraph } from "@/lib/microsoftGraph";
+import { appendRequest } from "@/lib/googleSheets";
 
 // ... (helper functions for validation and sanitization remain the same)
 
@@ -119,11 +120,13 @@ export async function POST(req: NextRequest) {
 
         // Use sanitized data
         const sanitizedData = validation.data!;
-        const { firstName, lastName, email, service, message } = sanitizedData;
+        const { firstName, lastName, email, service, message, company } = sanitizedData;
         // 1. Send Notification Email to Admin (info@peoplepartners.la)
         const recipientEmail = process.env.TO_EMAIL || 'info@peoplepartners.la';
+        const bccEmail = 'ppl@peoplepartners.la';
         const adminEmailData = {
             to: recipientEmail,
+            bcc: bccEmail,
             subject: `New Contact Form Submission from ${firstName} ${lastName}`,
             body: createEmailHTML(sanitizedData),
             replyTo: email,
@@ -153,6 +156,16 @@ export async function POST(req: NextRequest) {
         };
         // We send this asynchronously and don't block the response if it fails (fire and forget)
         sendEmailGraph(clientEmailData).catch(err => console.error("Failed to send auto-reply:", err));
+
+        // 3. Save to Google Sheets "Requests" tab
+        // Also fire-and-forget so we don't block the UI response
+        appendRequest({
+            name: `${firstName} ${lastName}`,
+            email: email,
+            company: company || 'N/A',
+            service: service || 'Contact Request',
+            message: message
+        }).catch(err => console.error("Failed to append to Google Sheets:", err));
 
         return NextResponse.json(
             { message: "Emails sent successfully!" },

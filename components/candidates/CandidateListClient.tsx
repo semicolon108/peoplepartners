@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Candidate } from '@/lib/googleSheets';
 import CandidateCard from './CandidateCard';
 import ContactModal from './ContactModal';
+import CandidateDetailModal from './CandidateDetailModal';
 import { Send } from 'lucide-react';
 
 interface CandidateListClientProps {
@@ -13,8 +14,13 @@ interface CandidateListClientProps {
 
 export default function CandidateListClient({ initialCandidates }: CandidateListClientProps) {
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalCandidates, setModalCandidates] = useState<Candidate[]>([]);
+
+    // Request Modal State
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+    const [contactModalCandidates, setContactModalCandidates] = useState<Candidate[]>([]);
+
+    // Detail Modal State
+    const [viewCandidate, setViewCandidate] = useState<Candidate | null>(null);
 
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -45,22 +51,22 @@ export default function CandidateListClient({ initialCandidates }: CandidateList
         if (!selectedIds.includes(candidate.id)) {
             setSelectedIds(prev => [...prev, candidate.id]);
         }
-        setModalCandidates([candidate]);
-        setIsModalOpen(true);
+        setContactModalCandidates([candidate]);
+        setIsContactModalOpen(true);
     };
 
     // Open modal for ALL selected candidates
     const handleBulkRequest = () => {
         const selected = initialCandidates.filter(c => selectedIds.includes(c.id));
-        setModalCandidates(selected);
-        setIsModalOpen(true);
+        setContactModalCandidates(selected);
+        setIsContactModalOpen(true);
     };
 
     const handleRemoveFromModal = (id: string) => {
-        setModalCandidates(prev => prev.filter(c => c.id !== id));
+        setContactModalCandidates(prev => prev.filter(c => c.id !== id));
         setSelectedIds(prev => prev.filter(cId => cId !== id));
         if (selectedIds.length <= 1) { // If it was the last one
-            setIsModalOpen(false);
+            setIsContactModalOpen(false);
         }
     };
 
@@ -74,6 +80,7 @@ export default function CandidateListClient({ initialCandidates }: CandidateList
                         isSelected={selectedIds.includes(candidate.id)}
                         onToggleSelection={() => toggleSelection(candidate.id)}
                         onRequestInterview={() => handleSingleRequest(candidate)}
+                        onViewProfile={() => setViewCandidate(candidate)}
                     />
                 ))}
 
@@ -147,15 +154,27 @@ export default function CandidateListClient({ initialCandidates }: CandidateList
                 </div>
             )}
 
+            {/* Detail Modal */}
+            <CandidateDetailModal
+                isOpen={!!viewCandidate}
+                candidate={viewCandidate}
+                onClose={() => setViewCandidate(null)}
+                onRequestInterview={(candidate) => {
+                    setViewCandidate(null); // Close detail modal
+                    handleSingleRequest(candidate); // Open contact modal
+                }}
+            />
+
+            {/* Contact Form Modal */}
             <ContactModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                candidates={modalCandidates}
+                isOpen={isContactModalOpen}
+                onClose={() => setIsContactModalOpen(false)}
+                candidates={contactModalCandidates}
                 onRemoveCandidate={handleRemoveFromModal}
                 onSuccess={() => {
-                    setIsModalOpen(false);
+                    setIsContactModalOpen(false);
                     setSelectedIds([]);
-                    setModalCandidates([]);
+                    setContactModalCandidates([]);
                 }}
             />
         </div>

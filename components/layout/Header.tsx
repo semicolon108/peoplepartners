@@ -59,6 +59,7 @@ const navigation: NavSection[] = [
     items: [
       { name: 'Browse Jobs', href: '/careers' },
       { name: 'Submit Your CV', href: '/apply' },
+      { name: 'Personality Assessment', href: '/services/career-transitioning/riasec' },
     ]
   },
   { name: 'Why Choose Us?', href: '/about', type: 'link' },
