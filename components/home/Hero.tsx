@@ -23,9 +23,9 @@ export default function Hero() {
                     </Link>
                     <Link
                         href="/apply"
-                        className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-3 rounded-lg text-lg hover:bg-white/20 hover:-translate-y-1 transition-all duration-300"
+                        className="w-full sm:w-auto bg-brand-yellow-400 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-3 rounded-lg text-lg hover:bg-brand-yellow-500 hover:-translate-y-1 transition-all duration-300"
                     >
-                        Drop Your CV
+                        ຝາກ CV ກັບພວກເຮົາ
                     </Link>
                 </div>
                 <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 mt-16">
@@ -34,7 +34,7 @@ export default function Hero() {
                         <div className="text-sm text-slate-100 opacity-80">Established</div>
                     </div>
                     <div className="text-center">
-                        <div className="text-4xl font-bold text-brand-blue-50">20+</div>
+                        <div className="text-4xl font-bold text-brand-blue-50">150+</div>
                         <div className="text-sm text-slate-100 opacity-80">Trusted Clients</div>
                     </div>
                     <div className="text-center">

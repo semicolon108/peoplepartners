@@ -68,8 +68,8 @@ export default function ApplyPage() {
         },
 
         {
-            title: "Entry Level & Operations",
-            description: "Start your journey with us. No English language requirement for these roles.",
+            title: "ວຽກໃຊ້ທັກສະຝີມື ແລະ ແຮງງານ",
+            description: "ເລີ່ມຕົ້ນການເດີນທາງຂອງທ່ານກັບພວກເຮົາ. ບໍ່ຈຳເປັນຕ້ອງໃຊ້ພາສາອັງກິດສຳລັບວຽກເຫຼົ່ານີ້.",
             icon: <UserPlus size={32} />,
             href: "https://www.careers-page.com/ppl/job/L79W8YW5/apply",
             colorClass: "bg-gradient-to-br from-emerald-500 to-emerald-600",
@@ -81,8 +81,8 @@ export default function ApplyPage() {
         <div className="pt-20">
             <Breadcrumb pageTitle="Apply" />
             <PageHero
-                title="Start Your Journey"
-                subtitle="Select the path that best matches your experience and career goals."
+                title="ເລີ່ມຕົ້ນການເດີນທາງຂອງທ່ານ"
+                subtitle="ເລືອກເສັ້ນທາງທີ່ດີທີ່ສຸດໃຫ້ເໝາະສົມກັບປະສົບການ ແລະ ເປົ້າໝາຍໃນອາຊີບຂອງທ່ານ."
             />
 
             <main className="py-20 bg-brand-gray-50">

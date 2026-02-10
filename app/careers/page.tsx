@@ -121,17 +121,17 @@ export default async function CareersPage() {
                         <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue-50 rounded-full -mr-32 -mt-32 opacity-50 pointer-events-none"></div>
                         <div className="relative z-10">
                             <h3 className="text-xl font-bold text-brand-gray-900 mb-2">
-                                Not sure which role fits you best?
+                                ບໍ່ແນ່ໃຈວ່າວຽກໃດເໝາະສົມກັບທ່ານທີ່ສຸດແມ່ນບໍ່?
                             </h3>
                             <p className="text-brand-gray-600">
-                                Select your experience level and let us guide you to the right opportunity.
+                                ຝາກ CV ກັບພວກເຮົາ ແລ້ວພວກເຮົາຈະແນະນຳໂອກາດທີ່ຖືກຕ້ອງ ແລະ ເໝາະສົມກັບທ່ານທີ່ສຸດໃຫ້ທ່ານ.
                             </p>
                         </div>
                         <a
                             href="/apply"
                             className="relative z-10 whitespace-nowrap px-6 py-3 bg-brand-blue-600 hover:bg-brand-blue-700 text-white font-semibold rounded-lg transition-colors shadow-md hover:shadow-lg"
                         >
-                            Start Here
+                            ຝາກ CV ກັບພວກເຮົາ
                         </a>
                     </div>
 
