@@ -10,6 +10,7 @@ export interface Candidate {
     bio: string; // Short professional summary
     availability: string; // e.g., "Immediate", "2 Weeks Notice"
     contractType: string; // e.g., "Full-time", "Contract"
+    status?: string; // e.g., "Active", "Inactive"
 }
 
 // ... (imports remain)
@@ -59,17 +60,22 @@ export async function getCandidates(): Promise<Candidate[]> {
         try {
             const response = await sheets.spreadsheets.values.get({
                 spreadsheetId: sheetId,
-                range: 'Sheet1!A2:H',
+                range: 'Sheet1!A2:I', // Extended to Column I for Status
             });
 
             const rows = response.data.values;
 
             if (!rows || rows.length === 0) {
-                console.warn('Google Sheets connected but returned no data (Range: Sheet1!A2:H).');
+                console.warn('Google Sheets connected but returned no data (Range: Sheet1!A2:I).');
                 return [];
             }
 
             console.log(`Successfully fetched ${rows.length} candidates.`);
+
+            // Debug: Log the first row to see if status column is coming through
+            if (rows.length > 0) {
+                console.log('DEBUG First Row Status:', rows[0]?.[8]);
+            }
 
             return rows.map((row) => ({
                 id: row[0] || '',
@@ -80,7 +86,10 @@ export async function getCandidates(): Promise<Candidate[]> {
                 bio: row[5] || '',
                 availability: row[6] || 'Negotiable',
                 contractType: row[7] || 'Full-time',
-            })).filter(candidate => candidate.id && candidate.role);
+                status: row[8] || 'Inactive', // Column I
+            }))
+                .filter(candidate => candidate.id && candidate.role)
+                .filter(candidate => candidate.status?.trim().toLowerCase() === 'active'); // Only show Active candidates
 
         } catch (apiError: any) {
             if (apiError.code === 403) {

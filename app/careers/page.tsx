@@ -129,7 +129,7 @@ export default async function CareersPage() {
                         </div>
                         <a
                             href="/apply"
-                            className="relative z-10 whitespace-nowrap px-6 py-3 bg-brand-blue-600 hover:bg-brand-blue-700 text-white font-semibold rounded-lg transition-colors shadow-md hover:shadow-lg"
+                            className="relative z-10 whitespace-nowrap px-6 py-3 bg-brand-yellow-400 hover:bg-brand-yellow-500 text-white font-semibold rounded-lg transition-colors shadow-md hover:shadow-lg"
                         >
                             ຝາກ CV ກັບພວກເຮົາ
                         </a>

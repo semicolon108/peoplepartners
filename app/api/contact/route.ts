@@ -119,22 +119,43 @@ export async function POST(req: NextRequest) {
 
         // Use sanitized data
         const sanitizedData = validation.data!;
-        const { firstName, lastName, email } = sanitizedData;
+        const { firstName, lastName, email, service, message } = sanitizedData;
+        // 1. Send Notification Email to Admin (info@peoplepartners.la)
         const recipientEmail = process.env.TO_EMAIL || 'info@peoplepartners.la';
-
-        // Email options
-        const emailData = {
+        const adminEmailData = {
             to: recipientEmail,
             subject: `New Contact Form Submission from ${firstName} ${lastName}`,
             body: createEmailHTML(sanitizedData),
             replyTo: email,
         };
+        await sendEmailGraph(adminEmailData);
 
-        // Send email via Microsoft Graph
-        await sendEmailGraph(emailData);
+        // 2. Send Auto-Reply Email to Client
+        const clientEmailData = {
+            to: email, // The client's email
+            subject: `We received your inquiry: ${service || 'Contact Request'}`,
+            body: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                    <h2 style="color: #333;">Thank you for contacting People Partners Laos!</h2>
+                    <p>Dear ${firstName},</p>
+                    <p>We have received your inquiry regarding <strong>${service || 'our services'}</strong>.</p>
+                    <p>Our team will review your request and get back to you shortly.</p>
+                    <br>
+                    <p><strong>Your Message:</strong></p>
+                    <p style="background: #f9f9f9; padding: 15px; border-left: 3px solid #007bff; font-style: italic;">
+                        ${message.replace(/\n/g, '<br>')}
+                    </p>
+                    <br>
+                    <p>Best Regards,</p>
+                    <p><strong>People Partners Team</strong></p>
+                </div>
+            `,
+        };
+        // We send this asynchronously and don't block the response if it fails (fire and forget)
+        sendEmailGraph(clientEmailData).catch(err => console.error("Failed to send auto-reply:", err));
 
         return NextResponse.json(
-            { message: "Email sent successfully!" },
+            { message: "Emails sent successfully!" },
             { status: 200 }
         );
 

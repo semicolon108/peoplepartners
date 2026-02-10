@@ -1,14 +1,17 @@
 
 import PageHero from '@/components/shared/PageHero';
-import CandidateList from '@/components/candidates/CandidateList';
 import Breadcrumb from '@/components/services/Breadcrumb';
+import CandidateListClient from '@/components/candidates/CandidateListClient';
+import { getCandidates } from '@/lib/googleSheets';
 
 export const metadata = {
     title: 'Highlight Candidates | People Partners Lao',
     description: 'Explore our curated list of experienced professionals ready for their next opportunity.',
 };
 
-export default function CandidatesPage() {
+export default async function CandidatesPage() {
+    const candidates = await getCandidates();
+
     return (
         <div className="pt-20">
             <Breadcrumb pageTitle="Highlight Candidates" />
@@ -24,11 +27,11 @@ export default function CandidatesPage() {
                             Featured Candidates
                         </h2>
                         <p className="text-lg text-brand-gray-600">
-                            We've pre-vetted these candidates for their skills and experience. view their profiles and request an interview directly.
+                            We've pre-vetted these candidates for their skills and experience. Select multiple profiles and request interviews directly.
                         </p>
                     </div>
 
-                    <CandidateList />
+                    <CandidateListClient initialCandidates={candidates} />
                 </div>
             </main>
 
