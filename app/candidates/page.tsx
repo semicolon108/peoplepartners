@@ -5,8 +5,8 @@ import CandidateListClient from '@/components/candidates/CandidateListClient';
 import { getCandidates } from '@/lib/googleSheets';
 
 export const metadata = {
-    title: 'Browse Candidates | Highlight Profiles',
-    description: 'Browse our curated list of available professionals in Laos. View profiles and request interviews directly.',
+    title: 'Browse InstaTalent | People Partners Laos',
+    description: 'Browse our curated pool of InstaTalent professionals in Laos. View profiles and request interviews directly.',
 };
 
 export const dynamic = 'force-dynamic';
@@ -17,17 +17,17 @@ export default async function CandidatesPage() {
 
     return (
         <div className="pt-20">
-            <Breadcrumb pageTitle="Highlight Candidates" />
+            <Breadcrumb pageTitle="InstaTalent" />
             <PageHero
                 title="Exceptional Talent, Ready to Hire"
-                subtitle="Browse our curated selection of experienced professionals who are available for immediate opportunities."
+                subtitle="Browse our curated InstaTalent pool of experienced professionals who are available for immediate opportunities."
             />
 
             <main className="py-20 bg-brand-gray-50">
                 <div className="container">
                     <div className="mb-12 max-w-3xl mx-auto text-center">
                         <h2 className="text-3xl font-bold text-brand-gray-900 mb-4">
-                            Featured Candidates
+                            Featured InstaTalent
                         </h2>
                         <p className="text-lg text-brand-gray-600">
                             We've pre-vetted these candidates for their skills and experience. Select multiple profiles and request interviews directly.
@@ -49,7 +49,7 @@ export default async function CandidatesPage() {
                             Looking for someone specific?
                         </h3>
                         <p className="text-blue-100 mb-8 max-w-2xl mx-auto relative z-10">
-                            Our Highlight Candidates are just a glimpse of our talent pool. efficient recruitment services can help you find the perfect match for any role.
+                            Our InstaTalent candidates are just a glimpse of our talent pool. efficient recruitment services can help you find the perfect match for any role.
                         </p>
                         <a
                             href="/contact"

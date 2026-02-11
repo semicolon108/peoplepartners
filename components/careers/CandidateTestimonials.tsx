@@ -27,7 +27,7 @@ export default function CandidateTestimonials() {
                         Success Stories
                     </h2>
                     <p className="text-brand-gray-600 text-lg">
-                        Join hundreds of professionals who have found their dream careers through People Partners Lao.
+                        Join hundreds of professionals who have found their dream careers through People Partners Laos.
                     </p>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8">

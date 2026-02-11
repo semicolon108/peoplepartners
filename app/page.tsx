@@ -8,7 +8,7 @@ import CTA from '@/components/shared/CTA';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "People Partners Lao | HR Solutions, Recruitment & PEO Services",
+  title: "People Partners Laos | HR Solutions, Recruitment & PEO Services",
   description: "Leading HR consulting firm in Laos offering recruitment, PEO/EOR, payroll, and business process outsourcing services.",
 };
 

@@ -107,7 +107,7 @@ export async function getManatalJobs(): Promise<Job[]> {
 
 
 export const metadata = {
-    title: 'Jobs in Laos - Career Opportunities | People Partners Lao',
+    title: 'Jobs in Laos - Career Opportunities | People Partners Laos',
     description: 'Explore current job openings and build your career with top companies in Laos. Apply directly through our platform.',
 };
 
@@ -119,7 +119,7 @@ export default async function CareersPage() {
             <Breadcrumb pageTitle="Careers" />
             <PageHero
                 title="We are actively hiring"
-                subtitle="Explore exciting career opportunities at People Partners Lao and help us empower businesses to thrive."
+                subtitle="Explore exciting career opportunities at People Partners Laos and help us empower businesses to thrive."
             />
             <main className="py-20 bg-brand-gray-50">
                 <div className="container">

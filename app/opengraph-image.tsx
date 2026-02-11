@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og'
 import { LOGO_BASE64 } from '@/lib/logo'
 
 export const runtime = 'edge'
-export const alt = 'People Partners Lao - Your Expert HR Partner in Laos'
+export const alt = 'People Partners Laos - Your Expert HR Partner in Laos'
 export const size = {
     width: 1200,
     height: 630,
@@ -52,7 +52,7 @@ export default async function Image() {
                     >
                         <img
                             src={LOGO_BASE64}
-                            alt="People Partners Lao Logo"
+                            alt="People Partners Laos Logo"
                             style={{
                                 width: '100%',
                                 height: '100%',
@@ -70,7 +70,7 @@ export default async function Image() {
                             textShadow: '0 4px 8px rgba(0,0,0,0.3)',
                         }}
                     >
-                        People Partners Lao
+                        People Partners Laos
                     </h1>
 
                     <p

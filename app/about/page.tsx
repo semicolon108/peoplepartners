@@ -9,8 +9,8 @@ import Image from 'next/image';
 
 
 export const metadata: Metadata = {
-    title: 'About Us | People Partners Lao',
-    description: 'Learn about our story, our expert team, and why People Partners Lao is the leading HR partner for businesses in Laos.',
+    title: 'About Us | People Partners Laos',
+    description: 'Learn about our story, our expert team, and why People Partners Laos is the leading HR partner for businesses in Laos.',
 };
 
 
@@ -41,7 +41,7 @@ export default function AboutPage() {
                                     Built on Trust, Driven by Excellence
                                 </h3>
                                 <p className="text-brand-gray-600">
-                                    People Partners Lao was established as the sister company of
+                                    People Partners Laos was established as the sister company of
                                     108Jobs, Laos&apos; No. 1 job portal since 2011. Born from
                                     the vision to bridge the gap between international business
                                     needs and local HR expertise, we have been serving the Lao

@@ -22,7 +22,7 @@ export default function CandidateDetailModal({ candidate, isOpen, onClose, onReq
                 <div className="p-6 border-b border-gray-100 flex justify-between items-start bg-gray-50/50">
                     <div>
                         <div className="flex items-center gap-3 mb-2">
-                            <span className="inline-block px-3 py-1 bg-brand-blue-100 text-brand-blue-700 text-xs font-bold rounded-full uppercase tracking-wide">
+                            <span className="inline-block px-3 py-1 bg-brand-blue-100 text-brand-blue-700 text-xs font-bold rounded-lg uppercase tracking-wide">
                                 {candidate.role}
                             </span>
                             <span className="text-gray-400 text-sm font-medium">#{candidate.id}</span>

@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Candidate } from '@/lib/googleSheets';
 import CandidateCard from './CandidateCard';
 import ContactModal from './ContactModal';
@@ -14,6 +14,7 @@ interface CandidateListClientProps {
 
 export default function CandidateListClient({ initialCandidates }: CandidateListClientProps) {
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const listTopRef = useRef<HTMLDivElement>(null);
 
     // Request Modal State
     const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -33,8 +34,7 @@ export default function CandidateListClient({ initialCandidates }: CandidateList
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
-        // Optional: Scroll to top of list
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        listTopRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
     // Toggle selection for a single candidate
@@ -71,7 +71,7 @@ export default function CandidateListClient({ initialCandidates }: CandidateList
     };
 
     return (
-        <div className="relative">
+        <div className="relative scroll-mt-24" ref={listTopRef}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-12">
                 {currentCandidates.map((candidate) => (
                     <CandidateCard
@@ -86,7 +86,7 @@ export default function CandidateListClient({ initialCandidates }: CandidateList
 
                 {initialCandidates.length === 0 && (
                     <div className="col-span-full text-center py-20 bg-brand-gray-50 rounded-xl border border-dashed border-brand-gray-300">
-                        <p className="text-brand-gray-500">No highlighted candidates available at the moment.</p>
+                        <p className="text-brand-gray-500">No InstaTalent professionals available at the moment.</p>
                     </div>
                 )}
             </div>

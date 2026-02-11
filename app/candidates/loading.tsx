@@ -5,10 +5,10 @@ import Breadcrumb from '@/components/services/Breadcrumb';
 export default function Loading() {
     return (
         <div className="pt-20">
-            <Breadcrumb pageTitle="Highlight Candidates" />
+            <Breadcrumb pageTitle="InstaTalent" />
             <PageHero
                 title="Exceptional Talent, Ready to Hire"
-                subtitle="Browse our curated selection of experienced professionals who are available for immediate opportunities."
+                subtitle="Browse our curated InstaTalent pool of experienced professionals who are available for immediate opportunities."
             />
 
             <main className="py-20 bg-brand-gray-50">

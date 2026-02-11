@@ -1,12 +1,11 @@
 // app/careers/JobListClient.tsx
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Job } from './page';
 import { MapPin, Clock, Briefcase, Search, Filter, X, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-// Enhanced JobCard matching CandidateCard style
 function JobCard({ job }: { job: Job }) {
     return (
         <Link
@@ -58,6 +57,7 @@ function JobCard({ job }: { job: Job }) {
 export default function JobListClient({ initialJobs }: { initialJobs: Job[] }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedDepartment, setSelectedDepartment] = useState('');
+    const listTopRef = useRef<HTMLDivElement>(null);
 
     // Pagination state
     const [currentPage, setCurrentPage] = useState(1);
@@ -102,7 +102,7 @@ export default function JobListClient({ initialJobs }: { initialJobs: Job[] }) {
     }
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 scroll-mt-24" ref={listTopRef}>
             {/* Search and filters */}
             <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -171,24 +171,52 @@ export default function JobListClient({ initialJobs }: { initialJobs: Job[] }) {
                             />
                         ))}
                     </div>
-                    {/* Pagination controls */}
-                    <div className="flex justify-center gap-2 mt-6">
-                        <button
-                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                            disabled={currentPage === 1}
-                            className="px-4 py-2 rounded bg-brand-blue-100 text-brand-blue-700 disabled:opacity-50"
-                        >
-                            Previous
-                        </button>
-                        <span className="px-4 py-2">{currentPage} / {totalPages}</span>
-                        <button
-                            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                            disabled={currentPage === totalPages}
-                            className="px-4 py-2 rounded bg-brand-blue-100 text-brand-blue-700 disabled:opacity-50"
-                        >
-                            Next
-                        </button>
-                    </div>
+                    {/* Pagination Controls */}
+                    {totalPages > 1 && (
+                        <div className="flex justify-center items-center gap-2 mt-12 mb-8">
+                            <button
+                                onClick={() => {
+                                    setCurrentPage(p => Math.max(1, p - 1));
+                                    listTopRef.current?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                disabled={currentPage === 1}
+                                className="px-4 py-2 border border-brand-gray-300 rounded-lg text-sm font-medium text-brand-gray-700 hover:bg-brand-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            >
+                                Previous
+                            </button>
+
+                            <div className="flex gap-1">
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                                    <button
+                                        key={page}
+                                        onClick={() => {
+                                            setCurrentPage(page);
+                                            listTopRef.current?.scrollIntoView({ behavior: 'smooth' });
+                                        }}
+                                        className={`
+                                            w-10 h-10 rounded-lg text-sm font-medium transition-colors
+                                            ${currentPage === page
+                                                ? 'bg-brand-blue-600 text-white'
+                                                : 'text-brand-gray-700 hover:bg-brand-gray-50 border border-transparent'}
+                                        `}
+                                    >
+                                        {page}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <button
+                                onClick={() => {
+                                    setCurrentPage(p => Math.min(totalPages, p + 1));
+                                    listTopRef.current?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                disabled={currentPage === totalPages}
+                                className="px-4 py-2 border border-brand-gray-300 rounded-lg text-sm font-medium text-brand-gray-700 hover:bg-brand-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    )}
                 </>
             ) : (
                 <div className="text-center py-16 bg-white rounded-2xl shadow-sm border border-slate-200">

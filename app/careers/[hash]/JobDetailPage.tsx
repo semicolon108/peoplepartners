@@ -21,7 +21,7 @@ export default function JobDetailPage({ job, allJobs }: JobDetailPageProps) {
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: `${job.title} - People Partners Lao`,
+                    title: `${job.title} - People Partners Laos`,
                     text: `Check out this job opportunity: ${job.title} in ${job.department}`,
                     url: url,
                 });

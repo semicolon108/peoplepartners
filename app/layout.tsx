@@ -26,14 +26,14 @@ const notoSansLaoLoop = Noto_Sans_Lao_Looped({
 // Enhanced metadata with structured data
 export const metadata: Metadata = {
   title: {
-    template: '%s | People Partners Lao',
-    default: 'People Partners Lao - Your Expert HR Partner in Laos',
+    template: '%s | People Partners Laos',
+    default: 'People Partners Laos - Your Expert HR Partner in Laos',
   },
   description: 'Compliant. Efficient. Reliable. We combine unmatched local expertise with international service standards to power your business growth in Laos.',
   keywords: ['HR services', 'Laos', 'human resources', 'business solutions', 'compliance'],
-  authors: [{ name: 'People Partners Lao' }],
-  creator: 'People Partners Lao',
-  publisher: 'People Partners Lao',
+  authors: [{ name: 'People Partners Laos' }],
+  creator: 'People Partners Laos',
+  publisher: 'People Partners Laos',
   metadataBase: new URL('https://www.peoplepartners.la'),
   alternates: {
     canonical: '/',
@@ -50,16 +50,16 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'People Partners Lao - Your Expert HR Partner in Laos',
+    title: 'People Partners Laos - Your Expert HR Partner in Laos',
     description: 'Compliant. Efficient. Reliable. We combine unmatched local expertise with international service standards to power your business growth in Laos.',
     url: 'https://peoplepartners.la',
-    siteName: 'People Partners Lao',
+    siteName: 'People Partners Laos',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'People Partners Lao - Your Expert HR Partner in Laos',
+    title: 'People Partners Laos - Your Expert HR Partner in Laos',
     description: 'Compliant. Efficient. Reliable. We combine unmatched local expertise with international service standards to power your business growth in Laos.',
   },
   verification: {

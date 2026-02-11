@@ -1,11 +1,12 @@
-// app/sitemap.ts
 import { MetadataRoute } from "next";
+import { getManatalJobs } from "./careers/page";
+import { getAllNews } from "@/lib/news";
 
 // Base URL for the website
 const URL = "https://www.peoplepartners.la";
 
 // Sitemap generation function
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static routes with priority and change frequency
   const staticRoutes: MetadataRoute.Sitemap = [
     { path: "", priority: 1.0, changefreq: "daily" }, // Homepage
@@ -28,13 +29,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Add alternate language URLs for multilingual support (English and Lao)
     ...(route.path === "" || route.path.startsWith("/services")
       ? {
-          alternate: [
-            { href: `${URL}${route.path}`, hreflang: "x-default" }, // Default (English)
-            { href: `${URL}/la${route.path}`, hreflang: "lo" }, // Lao version
-          ],
-        }
+        alternate: [
+          { href: `${URL}${route.path}`, hreflang: "x-default" }, // Default (English)
+          { href: `${URL}/la${route.path}`, hreflang: "lo" }, // Lao version
+        ],
+      }
       : {}),
   }));
 
-  return staticRoutes;
+  // Fetch dynamic data
+  const jobs = await getManatalJobs();
+  const news = getAllNews();
+
+  // Dynamic routes for Jobs
+  const jobRoutes: MetadataRoute.Sitemap = jobs.map((job) => ({
+    url: `${URL}/careers/${job.hash}`,
+    lastModified: new Date().toISOString(), // In real app, use job.updated_at
+    priority: 0.8,
+    changefreq: "weekly",
+  }));
+
+  // Dynamic routes for News
+  const newsRoutes: MetadataRoute.Sitemap = news.map((post) => ({
+    url: `${URL}/news/${post.slug}`,
+    lastModified: new Date(post.date).toISOString(),
+    priority: 0.7,
+    changefreq: "monthly",
+  }));
+
+  return [...staticRoutes, ...jobRoutes, ...newsRoutes];
 }

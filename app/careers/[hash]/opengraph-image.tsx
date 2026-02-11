@@ -1,26 +1,30 @@
-// app/services/[service]/opengraph-image.tsx
+
 import { ImageResponse } from 'next/og'
 import { LOGO_BASE64 } from '@/lib/logo'
-import { serviceConfig } from '@/lib/serviceConfig'
+import { getManatalJobs } from '../page';
 
-
-export const runtime = 'edge'
+// export const runtime = 'edge'
 export const size = {
     width: 1200,
     height: 630,
 }
 export const contentType = 'image/png'
 
-
 /* eslint-disable-next-line @next/next/no-img-element */
-export default async function Image({ params }: { params: { service: string } }) {
-    const service = serviceConfig[params.service as keyof typeof serviceConfig] || serviceConfig.bpo
+export default async function Image({ params }: { params: { hash: string } }) {
+    const jobs = await getManatalJobs();
+    const job = jobs.find((j) => j.hash === params.hash);
+
+    // Fallback for missing job
+    const title = job?.title || 'Job Opportunity';
+    const department = job?.department || 'Careers';
+    const location = job?.location || 'Laos';
 
     return new ImageResponse(
         (
             <div
                 style={{
-                    background: service.gradient,
+                    background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
                     width: '100%',
                     height: '100%',
                     display: 'flex',
@@ -38,43 +42,55 @@ export default async function Image({ params }: { params: { service: string } })
                         textAlign: 'center',
                         color: 'white',
                         padding: '40px',
+                        width: '90%',
                     }}
                 >
-                    {/* Service Icon */}
+                    {/* Badge */}
                     <div
                         style={{
-                            fontSize: '80px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                            padding: '8px 24px',
+                            borderRadius: '30px',
+                            fontSize: '24px',
+                            fontWeight: '600',
                             marginBottom: '30px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
                         }}
                     >
-                        {service.icon}
+                        We Are Hiring
                     </div>
 
                     <h1
                         style={{
-                            fontSize: '56px',
+                            fontSize: '72px',
                             fontWeight: 'bold',
                             marginBottom: '20px',
                             lineHeight: '1.1',
                             textShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                            maxWidth: '1000px',
                         }}
                     >
-                        {service.title}
+                        {title}
                     </h1>
 
-                    <p
+                    <div
                         style={{
-                            fontSize: '28px',
-                            marginBottom: '40px',
+                            display: 'flex',
+                            gap: '20px',
+                            alignItems: 'center',
+                            fontSize: '32px',
+                            marginBottom: '60px',
                             opacity: 0.9,
-                            fontWeight: '400',
-                            maxWidth: '800px',
+                            fontWeight: '500',
                         }}
                     >
-                        {service.description}
-                    </p>
+                        <span>{department}</span>
+                        <span>•</span>
+                        <span>{location}</span>
+                    </div>
 
-                    {/* Company branding with logo */}
+                    {/* Company Footer */}
                     <div
                         style={{
                             display: 'flex',
@@ -83,30 +99,21 @@ export default async function Image({ params }: { params: { service: string } })
                             fontSize: '24px',
                             fontWeight: '600',
                             opacity: 0.9,
+                            backgroundColor: 'white',
+                            padding: '12px 24px',
+                            borderRadius: '12px',
+                            color: '#1e40af',
                         }}
                     >
-                        <div
+                        <img
+                            src={LOGO_BASE64}
+                            alt="People Partners Laos Logo"
                             style={{
-                                width: '50px',
-                                height: '50px',
-                                backgroundColor: 'white',
-                                borderRadius: '8px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                padding: '8px',
+                                width: '40px',
+                                height: '40px',
+                                objectFit: 'contain',
                             }}
-                        >
-                            <img
-                                src={LOGO_BASE64}
-                                alt="People Partners Laos Logo"
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    objectFit: 'contain',
-                                }}
-                            />
-                        </div>
+                        />
                         <span>People Partners Laos</span>
                     </div>
                 </div>

@@ -34,7 +34,7 @@ const navigation: NavSection[] = [
       {
         name: 'Find Talent',
         items: [
-          { name: 'Highlight Candidates', href: '/candidates' },
+          { name: 'InstaTalent', href: '/candidates' },
           { name: 'Recruitment Services', href: '/services/recruitment' },
         ]
       },

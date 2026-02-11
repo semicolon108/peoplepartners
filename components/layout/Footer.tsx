@@ -16,7 +16,7 @@ const services = [
 const companyLinks = [
   { name: "Why Choose Us?", href: "/about" },
   { name: "Opening Positions", href: "/careers" },
-  { name: "Highlight Candidates", href: "/candidates" },
+  { name: "InstaTalent", href: "/candidates" },
   { name: 'Personality Assessment', href: '/career-transitioning/riasec' },
   { name: "Contact Us", href: "/contact" },
   { name: "Free Consultation", href: "/contact#consultation" },
@@ -123,7 +123,7 @@ export default function Footer() {
         </div>
         <div className="border-t border-brand-gray-700 pt-4 text-center text-slate-400">
           <p>
-            © {new Date().getFullYear()} People Partners Lao. All rights
+            © {new Date().getFullYear()} People Partners Laos. All rights
             reserved. | Sister company of 108Jobs
           </p>
         </div>

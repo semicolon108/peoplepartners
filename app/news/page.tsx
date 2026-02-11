@@ -5,7 +5,7 @@ import { getAllNews } from '@/lib/news';
 import { Calendar, ChevronRight } from 'lucide-react';
 
 export const metadata = {
-    title: 'News & Insights - People Partners Lao',
+    title: 'News & Insights - People Partners Laos',
     description: 'Latest updates on Lao Labor Law, Social Security, and HR compliance.',
 };
 

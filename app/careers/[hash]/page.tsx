@@ -28,17 +28,17 @@ export async function generateMetadata({ params }: { params: Promise<{ hash: str
     }
 
     return {
-        title: `${job.title} - People Partners Lao`,
-        description: `Apply for ${job.title} position in ${job.department} at People Partners Lao. Location: ${job.location}`,
+        title: `${job.title} - People Partners Laos`,
+        description: `Apply for ${job.title} position in ${job.department} at People Partners Laos. Location: ${job.location}`,
         openGraph: {
-            title: `${job.title} - People Partners Lao`,
-            description: `Apply for ${job.title} position in ${job.department} at People Partners Lao. Location: ${job.location}`,
+            title: `${job.title} - People Partners Laos`,
+            description: `Apply for ${job.title} position in ${job.department} at People Partners Laos. Location: ${job.location}`,
             type: 'website',
         },
         twitter: {
             card: 'summary_large_image',
-            title: `${job.title} - People Partners Lao`,
-            description: `Apply for ${job.title} position in ${job.department} at People Partners Lao. Location: ${job.location}`,
+            title: `${job.title} - People Partners Laos`,
+            description: `Apply for ${job.title} position in ${job.department} at People Partners Laos. Location: ${job.location}`,
         },
     };
 }

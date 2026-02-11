@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps) {
     }
 
     return {
-        title: `${post.title} - People Partners Lao`,
+        title: `${post.title} - People Partners Laos`,
         description: post.excerpt,
     };
 }

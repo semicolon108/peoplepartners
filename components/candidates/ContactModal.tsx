@@ -2,7 +2,7 @@
 'use client';
 
 import { X, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Candidate } from '@/lib/googleSheets';
 
 interface ContactModalProps {
@@ -17,6 +17,29 @@ export default function ContactModal({ isOpen, onClose, candidates, onRemoveCand
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+
+    const handleClose = () => {
+        if (submitted && onSuccess) {
+            onSuccess();
+        }
+        onClose();
+        // Reset state after closing animation (approx)
+        setTimeout(() => {
+            setSubmitted(false);
+            setIsSubmitting(false);
+        }, 300);
+    };
+
+    // Auto-close after success
+    useEffect(() => {
+        let timeout: NodeJS.Timeout;
+        if (submitted) {
+            timeout = setTimeout(() => {
+                handleClose();
+            }, 3000); // Close after 3 seconds
+        }
+        return () => clearTimeout(timeout);
+    }, [submitted]);
 
     if (!isOpen) return null;
 
@@ -52,14 +75,9 @@ export default function ContactModal({ isOpen, onClose, candidates, onRemoveCand
             }
 
             setSubmitted(true);
-            if (onSuccess) {
-                // Wait a moment so user sees the success message before it closes? 
-                // Actually user flow: they see success modal content, then they click "Close".
-                // So we should trigger onSuccess ONLY when they close the modal AFTER success?
-                // OR we clear the selection immediately but keep modal open with "Success" state?
-                // Let's clear selection immediately behind the scenes.
-                onSuccess();
-            }
+            setSubmitted(true);
+            // Don't call onSuccess() here immediately.
+            // It will be called by handleClose() when the modal is closed.
         } catch (error) {
             console.error(error);
             setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred.');
@@ -68,12 +86,7 @@ export default function ContactModal({ isOpen, onClose, candidates, onRemoveCand
         }
     };
 
-    const handleClose = () => {
-        if (submitted && onSuccess) {
-            onSuccess();
-        }
-        onClose();
-    };
+
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
