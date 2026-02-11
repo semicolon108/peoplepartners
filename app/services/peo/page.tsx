@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     description: 'Enter the Lao market without establishing a legal entity. We become the legal employer of your staff while you retain full operational control, enabling rapid market entry with complete compliance.',
 }
 
+
+
 export default function PEOPage() {
     return (
         <div className="pt-20">

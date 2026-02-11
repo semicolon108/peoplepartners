@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     description: 'Access top talent in Laos through our extensive network and proven recruitment methodologies. Leverage 108Jobs\' platform and our deep local expertise to find quality candidates faster.',
 }
 
+
+
 export default function RecruitmentPage() {
     return (
         <div className="pt-20">

@@ -5,8 +5,8 @@ import CandidateListClient from '@/components/candidates/CandidateListClient';
 import { getCandidates } from '@/lib/googleSheets';
 
 export const metadata = {
-    title: 'Highlight Candidates | People Partners Lao',
-    description: 'Explore our curated list of experienced professionals ready for their next opportunity.',
+    title: 'Browse Candidates | Highlight Profiles',
+    description: 'Browse our curated list of available professionals in Laos. View profiles and request interviews directly.',
 };
 
 export const dynamic = 'force-dynamic';

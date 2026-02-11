@@ -5,6 +5,13 @@ import Trust from '@/components/home/Trust';
 import Testimonials from '@/components/shared/Testimonials';
 import CTA from '@/components/shared/CTA';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "People Partners Lao | HR Solutions, Recruitment & PEO Services",
+  description: "Leading HR consulting firm in Laos offering recruitment, PEO/EOR, payroll, and business process outsourcing services.",
+};
+
 export default function HomePage() {
   return (
     <>

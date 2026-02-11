@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     description: 'Learn about our story, our expert team, and why People Partners Lao is the leading HR partner for businesses in Laos.',
 };
 
+
+
 export default function AboutPage() {
     return (
         <div className="pt-20">

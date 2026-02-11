@@ -105,6 +105,12 @@ export async function getManatalJobs(): Promise<Job[]> {
     }
 }
 
+
+export const metadata = {
+    title: 'Jobs in Laos - Career Opportunities | People Partners Lao',
+    description: 'Explore current job openings and build your career with top companies in Laos. Apply directly through our platform.',
+};
+
 export default async function CareersPage() {
     const jobs = await getManatalJobs();
 
