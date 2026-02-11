@@ -85,7 +85,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-slate-300 hover:text-white transition-colors"
               >
-                108Jobs - Laos&apos; No. 1 Job Portal
+                108.Jobs - Laos&apos; No. 1 Job Portal
               </a>
             </div>
           </div>

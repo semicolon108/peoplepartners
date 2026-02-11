@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin, Globe } from 'lucide-react';
 interface ContactLine {
   text: string;
   href?: string;
-  target?: string; 
+  target?: string;
 }
 interface ContactDetail {
   icon: React.ReactNode;
@@ -42,20 +42,20 @@ export const contactDetails: ContactDetail[] = [
     icon: <Globe />,
     title: "Sister Company",
     lines: [
-      { text: "108Jobs", href: "https://www.108.jobs", target: "_blank" },
+      { text: "108.Jobs", href: "https://www.108.jobs", target: "_blank" },
       { text: "Laos' #1 Job Portal" },
     ],
   },
 ];
 
 export const servicesOfInterest = [
-    { value: "payroll", label: "Payroll Services" },
-    { value: "peo", label: "PEO / Employer of Record" },
-    { value: "bpo", label: "Business Process Outsourcing" },
-    { value: "recruitment", label: "Recruitment Services" },
-    { value: "career", label: "Career Transitioning" },
-    { value: "salary", label: "Salary Survey" },
-    { value: "consulting", label: "HR Consulting" },
-    { value: "visa", label: "Visa & Immigration" },
-    { value: "other", label: "Other" },
+  { value: "payroll", label: "Payroll Services" },
+  { value: "peo", label: "PEO / Employer of Record" },
+  { value: "bpo", label: "Business Process Outsourcing" },
+  { value: "recruitment", label: "Recruitment Services" },
+  { value: "career", label: "Career Transitioning" },
+  { value: "salary", label: "Salary Survey" },
+  { value: "consulting", label: "HR Consulting" },
+  { value: "visa", label: "Visa & Immigration" },
+  { value: "other", label: "Other" },
 ];

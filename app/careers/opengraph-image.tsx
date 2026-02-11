@@ -16,7 +16,7 @@ export default async function Image() {
         (
             <div
                 style={{
-                    background: 'white',
+                    background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
                     width: '100%',
                     height: '100%',
                     display: 'flex',
@@ -24,34 +24,8 @@ export default async function Image() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontFamily: 'Inter, sans-serif',
-                    position: 'relative',
-                    overflow: 'hidden',
                 }}
             >
-                {/* Background Decor */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: -100,
-                        right: -100,
-                        width: 400,
-                        height: 400,
-                        borderRadius: '50%',
-                        background: 'rgba(30, 64, 175, 0.1)',
-                    }}
-                />
-                <div
-                    style={{
-                        position: 'absolute',
-                        bottom: -100,
-                        left: -100,
-                        width: 400,
-                        height: 400,
-                        borderRadius: '50%',
-                        background: 'rgba(59, 130, 246, 0.1)',
-                    }}
-                />
-
                 <div
                     style={{
                         display: 'flex',
@@ -59,83 +33,76 @@ export default async function Image() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         textAlign: 'center',
-                        zIndex: 10,
-                        border: '1px solid #e5e7eb',
-                        borderRadius: '24px',
-                        padding: '60px 80px',
-                        background: 'rgba(255, 255, 255, 0.9)',
-                        boxShadow: '0 20px 50px rgba(0,0,0,0.1)',
+                        color: 'white',
+                        padding: '40px',
+                        width: '90%',
                     }}
                 >
-                    {/* Logo Area */}
+                    {/* Badge */}
                     <div
                         style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '16px',
-                            marginBottom: '40px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                            padding: '8px 24px',
+                            borderRadius: '30px',
+                            fontSize: '24px',
+                            fontWeight: '600',
+                            marginBottom: '30px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
                         }}
                     >
-                        <div
-                            style={{
-                                width: '60px',
-                                height: '60px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                            }}
-                        >
-                            <img
-                                src={LOGO_BASE64}
-                                alt="Logo"
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    objectFit: 'contain',
-                                }}
-                            />
-                        </div>
-                        <span style={{ fontSize: '32px', fontWeight: 'bold', color: '#1e40af' }}>
-                            People Partners Laos
-                        </span>
+                        Careers
                     </div>
 
                     <h1
                         style={{
                             fontSize: '80px',
                             fontWeight: '900',
-                            color: '#111827',
                             marginBottom: '20px',
-                            lineHeight: '1',
-                            letterSpacing: '-2px',
+                            lineHeight: '1.1',
+                            textShadow: '0 4px 8px rgba(0,0,0,0.3)',
                         }}
                     >
-                        Careers
+                        Find Your Next Opportunity
                     </h1>
 
                     <p
                         style={{
-                            fontSize: '36px',
-                            color: '#4b5563',
-                            marginBottom: '40px',
+                            fontSize: '32px',
+                            marginBottom: '60px',
+                            opacity: 0.9,
+                            fontWeight: '500',
                             maxWidth: '800px',
                         }}
                     >
-                        Find Your Next Career Opportunity with Us
+                        We are hiring! Explore exciting roles and grow with us.
                     </p>
 
+                    {/* Company Footer */}
                     <div
                         style={{
                             display: 'flex',
-                            gap: '16px',
+                            alignItems: 'center',
+                            gap: '15px',
+                            fontSize: '24px',
+                            fontWeight: '600',
+                            opacity: 0.9,
+                            backgroundColor: 'white',
+                            padding: '12px 24px',
+                            borderRadius: '12px',
+                            color: '#1e40af',
                         }}
                     >
-                        <div style={{ padding: '10px 24px', background: '#eff6ff', color: '#1e40af', borderRadius: '50px', fontSize: '24px', fontWeight: '600' }}>
-                            Browse Openings
-                        </div>
-                        <div style={{ padding: '10px 24px', background: '#eff6ff', color: '#1e40af', borderRadius: '50px', fontSize: '24px', fontWeight: '600' }}>
-                            Apply Today
-                        </div>
+                        <img
+                            src={LOGO_BASE64}
+                            alt="People Partners Laos Logo"
+                            style={{
+                                width: '40px',
+                                height: '40px',
+                                objectFit: 'contain',
+                            }}
+                        />
+                        <span>People Partners Laos</span>
                     </div>
                 </div>
             </div>
