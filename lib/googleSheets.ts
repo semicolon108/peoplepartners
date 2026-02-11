@@ -1,5 +1,6 @@
 
 import { google } from 'googleapis';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export interface Candidate {
     id: string;
@@ -18,6 +19,7 @@ export interface Candidate {
 }
 
 export async function getCandidates(): Promise<Candidate[]> {
+    noStore(); // Opt out of static generation and caching
     try {
         const scopes = ['https://www.googleapis.com/auth/spreadsheets'];
         const sheetId = process.env.GOOGLE_SHEET_ID;
