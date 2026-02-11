@@ -56,13 +56,23 @@ export default function CandidateDetailModal({ candidate, isOpen, onClose, onReq
                             </div>
                             <p className="text-gray-900 font-semibold text-sm truncate" title={candidate.availability}>{candidate.availability}</p>
                         </div>
-                        <div className="p-3 bg-purple-50/50 rounded-xl border border-purple-100">
-                            <div className="flex items-center gap-2 text-purple-600 mb-1">
-                                <Briefcase size={16} />
-                                <span className="text-xs font-bold uppercase">Experience</span>
+                        {candidate.travel ? (
+                            <div className="p-3 bg-teal-50/50 rounded-xl border border-teal-100">
+                                <div className="flex items-center gap-2 text-teal-600 mb-1">
+                                    <Briefcase size={16} />
+                                    <span className="text-xs font-bold uppercase">Travel</span>
+                                </div>
+                                <p className="text-gray-900 font-semibold text-sm truncate" title={candidate.travel}>{candidate.travel}</p>
                             </div>
-                            <p className="text-gray-900 font-semibold text-sm truncate" title={candidate.experience}>{candidate.experience}</p>
-                        </div>
+                        ) : (
+                            <div className="p-3 bg-purple-50/50 rounded-xl border border-purple-100">
+                                <div className="flex items-center gap-2 text-purple-600 mb-1">
+                                    <Briefcase size={16} />
+                                    <span className="text-xs font-bold uppercase">Experience</span>
+                                </div>
+                                <p className="text-gray-900 font-semibold text-sm truncate" title={candidate.experience}>{candidate.experience}</p>
+                            </div>
+                        )}
                         <div className="p-3 bg-orange-50/50 rounded-xl border border-orange-100">
                             <div className="flex items-center gap-2 text-orange-600 mb-1">
                                 <DollarSign size={16} />
@@ -82,6 +92,19 @@ export default function CandidateDetailModal({ candidate, isOpen, onClose, onReq
                             {candidate.bio}
                         </div>
                     </div>
+
+                    {/* Not Preferred Section */}
+                    {candidate.notPreferred && (
+                        <div className="mb-8">
+                            <div className="flex items-center gap-2 mb-3 text-red-600 font-bold text-lg">
+                                <X className="text-red-500" size={20} />
+                                <h3>Not Preferred</h3>
+                            </div>
+                            <div className="text-gray-600 bg-red-50 p-5 rounded-xl border border-red-100 leading-relaxed whitespace-pre-line">
+                                {candidate.notPreferred}
+                            </div>
+                        </div>
+                    )}
 
                     {/* Skills Section */}
                     {candidate.skills.length > 0 && (
@@ -122,6 +145,18 @@ export default function CandidateDetailModal({ candidate, isOpen, onClose, onReq
                                 <p className="text-gray-900 font-medium">{candidate.contractType}</p>
                             </div>
                         </div>
+                        {/* Show Experience here if Travel took its spot in the grid */}
+                        {candidate.travel && (
+                            <div className="flex items-start gap-3">
+                                <div className="p-2 bg-gray-100 rounded-lg text-gray-500">
+                                    <Briefcase size={18} />
+                                </div>
+                                <div>
+                                    <p className="text-xs text-gray-500 uppercase font-bold">Experience</p>
+                                    <p className="text-gray-900 font-medium">{candidate.experience}</p>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
 

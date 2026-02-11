@@ -9,6 +9,9 @@ export const metadata = {
     description: 'Explore our curated list of experienced professionals ready for their next opportunity.',
 };
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function CandidatesPage() {
     const candidates = await getCandidates();
 

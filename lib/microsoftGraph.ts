@@ -72,6 +72,12 @@ export async function sendEmailGraph(emailData: EmailData): Promise<void> {
         const sendMail = {
             message: {
                 subject: emailData.subject,
+                from: {
+                    emailAddress: {
+                        address: senderEmail,
+                        name: "People Partners Laos"
+                    }
+                },
                 body: {
                     contentType: 'HTML',
                     content: emailData.body,

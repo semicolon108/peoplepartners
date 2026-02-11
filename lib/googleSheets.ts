@@ -13,7 +13,8 @@ export interface Candidate {
     status?: string;
     salary?: string;
     age?: string;
-    gender?: string;
+    notPreferred?: string;
+    travel?: string;
 }
 
 export async function getCandidates(): Promise<Candidate[]> {
@@ -95,9 +96,9 @@ export async function getCandidates(): Promise<Candidate[]> {
                     bio: row[11] || '',
                     role: row[12] || 'Open Role',
                     contractType: row[13] || 'Full-time',
-                    // Not Preferred (14), Travel (15) -> skipped for now?
-                    status: row[16] || 'Inactive', // Web_Status
-                    // Manatal Link (17) -> skipped
+                    notPreferred: row[14] || '',
+                    travel: row[15] || '',
+                    status: row[16] || 'Inactive',
                     skills: combinedSkills,
                 };
             })
