@@ -75,10 +75,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${notoSansLaoLoop.variable}`}>
-      <body className="font-sans antialiased bg-white text-slate-900 selection:bg-brand-blue/10">
+    <html lang="en" className={`${outfit.variable} ${notoSansLaoLoop.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased bg-white text-slate-900 selection:bg-brand-blue/10" suppressHydrationWarning>
         <Header />
-        <main className="min-h-screen">
+        <main className="min-h-screen" suppressHydrationWarning>
           {children}
           <Analytics />
           <SpeedInsights />

@@ -41,7 +41,7 @@ export default function CandidateDetailModal({ candidate, isOpen, onClose, onReq
                 <div className="p-6 overflow-y-auto custom-scrollbar">
 
                     {/* Key Stats Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                         <div className="p-3 bg-brand-blue-50/50 rounded-xl border border-brand-blue-100">
                             <div className="flex items-center gap-2 text-brand-blue-600 mb-1">
                                 <MapPin size={16} />
@@ -88,9 +88,11 @@ export default function CandidateDetailModal({ candidate, isOpen, onClose, onReq
                             <User className="text-brand-blue-500" size={20} />
                             <h3>Professional Summary</h3>
                         </div>
-                        <div className="prose prose-sm max-w-none text-gray-600 bg-gray-50 p-5 rounded-xl border border-gray-100 leading-relaxed whitespace-pre-line">
-                            {candidate.bio}
-                        </div>
+                        <ul className="list-disc list-inside space-y-1 text-gray-600 bg-gray-50 p-5 rounded-xl border border-gray-100 leading-relaxed">
+                            {candidate.bio.split('.').filter(sentence => sentence.trim().length > 0).map((sentence, index) => (
+                                <li key={index}>{sentence.trim()}.</li>
+                            ))}
+                        </ul>
                     </div>
 
                     {/* Not Preferred Section */}
