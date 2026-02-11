@@ -16,6 +16,7 @@ export interface Candidate {
     age?: string;
     notPreferred?: string;
     travel?: string;
+    gender?: string;
 }
 
 export async function getCandidates(): Promise<Candidate[]> {
