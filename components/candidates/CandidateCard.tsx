@@ -53,6 +53,11 @@ export default function CandidateCard({ candidate, isSelected, onToggleSelection
                     <p className="text-sm text-gray-500 flex items-center gap-2">
                         {candidate.location} • <span className="text-brand-green-600 font-medium">{candidate.availability}</span>
                     </p>
+                    {candidate.createdAt && (
+                        <p className="text-xs text-gray-400 mt-1">
+                            Added: {candidate.createdAt.split(',')[0]}
+                        </p>
+                    )}
                 </div>
 
                 {/* Tags (Age/Gender) */}

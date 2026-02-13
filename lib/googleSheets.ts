@@ -3,6 +3,7 @@ import { google } from 'googleapis';
 import { unstable_noStore as noStore } from 'next/cache';
 
 export interface Candidate {
+    createdAt?: string;
     id: string;
     role: string;
     location: string;
@@ -12,6 +13,7 @@ export interface Candidate {
     availability: string;
     contractType: string;
     status?: string;
+    manatalLink?: string;
     salary?: string;
     age?: string;
     notPreferred?: string;
@@ -61,13 +63,13 @@ export async function getCandidates(): Promise<Candidate[]> {
         try {
             const response = await sheets.spreadsheets.values.get({
                 spreadsheetId: sheetId,
-                range: 'Data!A2:R', // Extended to Column R (Index 17)
+                range: 'Data_local!A2:S', // Extended to Column S (Index 18)
             });
 
             const rows = response.data.values;
 
             if (!rows || rows.length === 0) {
-                console.warn('Google Sheets connected but returned no data (Range: Sheet1!A2:R).');
+                console.warn('Google Sheets connected but returned no data (Range: Data_local!A2:R).');
                 return [];
             }
 
@@ -80,28 +82,30 @@ export async function getCandidates(): Promise<Candidate[]> {
             }
 
             return rows.map((row) => {
-                // Combine Qualification (Col 7) and Language (Col 9) into skills
-                const qualification = row[7] ? [row[7].trim()] : [];
-                const languages = row[9] ? row[9].split(',').map((s: string) => s.trim()) : [];
+                // Combine Qualification (Col 8) and Language (Col 10) into skills
+                const qualification = row[8] ? [row[8].trim()] : [];
+                const languages = row[10] ? row[10].split(',').map((s: string) => s.trim()) : [];
                 const combinedSkills = [...qualification, ...languages];
 
                 return {
-                    id: row[0] || '',
-                    // Fullname (1) and Phone (2) are skipped
-                    gender: row[3] || '',
-                    location: row[4] || 'Remote',
-                    age: row[5] || '',
-                    experience: row[6] || 'N/A',
-                    // Qualification (7) -> used in skills
-                    salary: row[8] || 'Negotiable',
-                    // Language (9) -> used in skills
-                    availability: row[10] || 'Negotiable',
-                    bio: row[11] || '',
-                    role: row[12] || 'Open Role',
-                    contractType: row[13] || 'Full-time',
-                    notPreferred: row[14] || '',
-                    travel: row[15] || '',
-                    status: row[16] || 'Inactive',
+                    createdAt: row[0] || '', // Timestamp
+                    id: row[1] || '',        // ID
+                    // Fullname (2) and Phone (3) are skipped in this view
+                    gender: row[4] || '',
+                    location: row[5] || 'Remote',
+                    age: row[6] || '',
+                    experience: row[7] || 'N/A',
+                    // Qualification (8) -> used in skills
+                    salary: row[9] || 'Negotiable',
+                    // Language (10) -> used in skills
+                    availability: row[11] || 'Negotiable',
+                    bio: row[12] || '',
+                    role: row[13] || 'Open Role',
+                    contractType: row[14] || 'Full-time',
+                    notPreferred: row[15] || '',
+                    travel: row[16] || '',
+                    status: row[17] || 'Inactive',
+                    manatalLink: row[18] || '', // Column S
                     skills: combinedSkills,
                 };
             })
@@ -130,6 +134,119 @@ export async function getCandidates(): Promise<Candidate[]> {
         }
         return [];
 
+    }
+}
+
+export interface CandidateFormInput {
+    fullName: string;
+    phone: string;
+    gender: string;
+    location: string;
+    age: string;
+    experience: string;
+    qualification: string;
+    salary: string;
+    languages: string;
+    availability: string;
+    bio: string;
+    role: string;
+    contractType: string;
+    notPreferred: string;
+    travel: string;
+    manatalLink: string;
+}
+
+export async function addCandidate(data: CandidateFormInput): Promise<{ success: boolean; message: string }> {
+    noStore();
+    try {
+        const scopes = ['https://www.googleapis.com/auth/spreadsheets'];
+        const sheetId = process.env.GOOGLE_SHEET_ID;
+        const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+        let privateKey = process.env.GOOGLE_PRIVATE_KEY;
+
+        if (privateKey) privateKey = privateKey.replace(/\\n/g, '\n');
+
+        if (!sheetId || !clientEmail || !privateKey) {
+            console.error('Missing Google Sheets credentials for addCandidate');
+            return { success: false, message: 'Server Configuration Error' };
+        }
+
+        const auth = new google.auth.GoogleAuth({
+            credentials: {
+                client_email: clientEmail,
+                private_key: privateKey,
+            },
+            scopes: scopes,
+        });
+
+        const sheets = google.sheets({ version: 'v4', auth });
+
+        // 1. Get existing data to find the last ID
+        const response = await sheets.spreadsheets.values.get({
+            spreadsheetId: sheetId,
+            range: 'Data_local!B:B', // Column B contains IDs now
+        });
+
+        const rows = response.data.values || [];
+
+        // Generate new ID
+        let newId = 'PPL_INST-0001';
+        if (rows.length > 0) { // Check if any rows exist
+            const lastRow = rows[rows.length - 1];
+            const lastId = lastRow ? lastRow[0] : null; // Safe access
+            if (lastId && typeof lastId === 'string' && lastId.startsWith('PPL_INST-')) {
+                const parts = lastId.split('-');
+                if (parts.length > 1) {
+                    const numberPart = parseInt(parts[1] || '0');
+                    if (!isNaN(numberPart)) {
+                        newId = `PPL_INST-${String(numberPart + 1).padStart(4, '0')}`;
+                    }
+                }
+            }
+        }
+
+        const timestamp = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Bangkok' });
+
+        // 2. Append new row
+        // Structure: Timestamp(0), ID(1), Name(2), Phone(3), Gender(4), Location(5), 
+        // Age(6), Exp(7), Qual(8), Salary(9), Lang(10), Avail(11), Bio(12), Role(13), 
+        // Contract(14), NotPref(15), Travel(16), Status(17)
+
+        await sheets.spreadsheets.values.append({
+            spreadsheetId: sheetId,
+            range: 'Data_local!A:S',
+            valueInputOption: 'USER_ENTERED',
+            insertDataOption: 'INSERT_ROWS',
+            requestBody: {
+                values: [[
+                    timestamp,              // A: Timestamp
+                    newId,                  // B: ID
+                    data.fullName,          // C: Name
+                    data.phone,             // D: Phone
+                    data.gender,            // E: Gender
+                    data.location,          // F: Location
+                    data.age,               // G: Age
+                    data.experience,        // H: Experience
+                    data.qualification,     // I: Qualification
+                    data.salary,            // J: Salary
+                    data.languages,         // K: Languages
+                    data.availability,      // L: Availability
+                    data.bio,               // M: Bio
+                    data.role,              // N: Role
+                    data.contractType,      // O: Contract Type
+                    data.notPreferred,      // P: Not Preferred
+                    data.travel,            // Q: Travel
+                    'Inactive',             // R: Status (Default Inactive)
+                    data.manatalLink        // S: Manatal Link
+                ]],
+            },
+        });
+
+        return { success: true, message: 'Application submitted successfully' };
+
+    } catch (error) {
+        console.error("Failed to add candidate:", error);
+        return { success: false, message: 'Failed to submit application' };
     }
 }
 

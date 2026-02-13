@@ -27,10 +27,74 @@ export default function CandidateListClient({ initialCandidates }: CandidateList
     const [currentPage, setCurrentPage] = useState(1);
     const ITEMS_PER_PAGE = 9;
 
-    const totalPages = Math.ceil(initialCandidates.length / ITEMS_PER_PAGE);
+    // Sorting
+    const [sortBy, setSortBy] = useState<'newest' | 'oldest'>('newest');
+
+    const sortCandidates = (candidates: Candidate[]) => {
+        return [...candidates].sort((a, b) => {
+            const parseDate = (dateStr?: string) => {
+                if (!dateStr) return 0;
+
+                // Format: "DD/MM/YYYY, HH:MM:SS"
+                const parts = dateStr.split(',');
+                const datePart = parts[0]?.trim() || '';
+                const timePart = parts[1]?.trim() || '';
+
+                const dateComponents = datePart.split('/');
+                if (dateComponents.length !== 3) return 0;
+
+                const dayStr = dateComponents[0];
+                const monthStr = dateComponents[1];
+                const yearStr = dateComponents[2];
+
+                if (!dayStr || !monthStr || !yearStr) return 0;
+
+                const day = parseInt(dayStr, 10);
+                const month = parseInt(monthStr, 10) - 1;
+                const year = parseInt(yearStr, 10);
+
+                let hours = 0;
+                let minutes = 0;
+                let seconds = 0;
+
+                if (timePart) {
+                    const timeComponents = timePart.split(':');
+                    if (timeComponents.length >= 2) {
+                        const hourStr = timeComponents[0];
+                        const minuteStr = timeComponents[1];
+                        const secondStr = timeComponents[2]; // Optional
+
+                        if (hourStr && minuteStr) {
+                            hours = parseInt(hourStr, 10);
+                            minutes = parseInt(minuteStr, 10);
+                            seconds = secondStr ? parseInt(secondStr, 10) : 0;
+                        }
+                    }
+                }
+
+                if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+                    return new Date(year, month, day, hours, minutes, seconds).getTime();
+                }
+                return 0;
+            };
+
+            const dateA = parseDate(a.createdAt);
+            const dateB = parseDate(b.createdAt);
+
+            if (sortBy === 'newest') {
+                return dateB - dateA;
+            } else {
+                return dateA - dateB;
+            }
+        });
+    };
+
+    const sortedCandidates = sortCandidates(initialCandidates);
+
+    const totalPages = Math.ceil(sortedCandidates.length / ITEMS_PER_PAGE);
     const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
     const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-    const currentCandidates = initialCandidates.slice(indexOfFirstItem, indexOfLastItem);
+    const currentCandidates = sortedCandidates.slice(indexOfFirstItem, indexOfLastItem);
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
@@ -57,7 +121,7 @@ export default function CandidateListClient({ initialCandidates }: CandidateList
 
     // Open modal for ALL selected candidates
     const handleBulkRequest = () => {
-        const selected = initialCandidates.filter(c => selectedIds.includes(c.id));
+        const selected = sortedCandidates.filter(c => selectedIds.includes(c.id));
         setContactModalCandidates(selected);
         setIsContactModalOpen(true);
     };
@@ -72,6 +136,24 @@ export default function CandidateListClient({ initialCandidates }: CandidateList
 
     return (
         <div className="relative scroll-mt-24" ref={listTopRef}>
+            <div className="flex justify-end mb-6">
+                <div className="flex items-center gap-2">
+                    <label htmlFor="sort" className="text-sm font-medium text-gray-700">Sort by:</label>
+                    <select
+                        id="sort"
+                        value={sortBy}
+                        onChange={(e) => {
+                            setSortBy(e.target.value as 'newest' | 'oldest');
+                            setCurrentPage(1); // Reset to first page
+                        }}
+                        className="block w-40 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-brand-blue-500 focus:border-brand-blue-500 sm:text-sm rounded-md bg-white border"
+                    >
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                    </select>
+                </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-12">
                 {currentCandidates.map((candidate) => (
                     <CandidateCard
