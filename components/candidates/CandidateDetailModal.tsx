@@ -1,7 +1,7 @@
 
 'use client';
 
-import { X, MapPin, Calendar, Briefcase, FileText, DollarSign, User, Clock, CheckCircle2 } from 'lucide-react';
+import { X, MapPin, Calendar, Briefcase, FileText, User, Clock, CheckCircle2, Wallet } from 'lucide-react';
 import { Candidate } from '@/lib/googleSheets';
 
 interface CandidateDetailModalProps {
@@ -75,7 +75,7 @@ export default function CandidateDetailModal({ candidate, isOpen, onClose, onReq
                         )}
                         <div className="p-3 bg-orange-50/50 rounded-xl border border-orange-100">
                             <div className="flex items-center gap-2 text-orange-600 mb-1">
-                                <DollarSign size={16} />
+                                <Wallet size={16} />
                                 <span className="text-xs font-bold uppercase">Salary</span>
                             </div>
                             <p className="text-gray-900 font-semibold text-sm truncate" title={candidate.salary || 'Negotiable'}>{candidate.salary || 'Negotiable'}</p>

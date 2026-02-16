@@ -205,7 +205,21 @@ export async function addCandidate(data: CandidateFormInput): Promise<{ success:
             }
         }
 
-        const timestamp = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Bangkok' });
+        // Use explicit formatting to avoid locale-dependent datetime output
+        const now = new Date();
+        const formatter = new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Asia/Bangkok',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+        });
+        const parts = formatter.formatToParts(now);
+        const get = (type: string) => parts.find(p => p.type === type)?.value ?? '';
+        const timestamp = `${get('year')}-${get('month')}-${get('day')} ${get('hour')}:${get('minute')}:${get('second')}`;
 
         // 2. Append new row
         // Structure: Timestamp(0), ID(1), Name(2), Phone(3), Gender(4), Location(5), 
@@ -280,7 +294,20 @@ export async function appendRequest(data: {
 
         const sheets = google.sheets({ version: 'v4', auth });
 
-        const date = "'" + new Date().toLocaleString('en-GB', { timeZone: 'Asia/Bangkok' });
+        const now = new Date();
+        const formatter = new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Asia/Bangkok',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+        });
+        const parts = formatter.formatToParts(now);
+        const get = (type: string) => parts.find(p => p.type === type)?.value ?? '';
+        const date = "'" + `${get('year')}-${get('month')}-${get('day')} ${get('hour')}:${get('minute')}:${get('second')}`;
 
         await sheets.spreadsheets.values.append({
             spreadsheetId: sheetId,

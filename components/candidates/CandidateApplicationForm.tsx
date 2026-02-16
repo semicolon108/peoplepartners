@@ -17,6 +17,8 @@ interface CandidateApplicationFormProps {
 export default function CandidateApplicationForm({ submitAction }: CandidateApplicationFormProps) {
     const [step, setStep] = useState<'form' | 'submitting' | 'success'>('form');
     const [error, setError] = useState<string | null>(null);
+    const [salaryCurrency, setSalaryCurrency] = useState('USD');
+    const [salaryAmount, setSalaryAmount] = useState('');
     const [formData, setFormData] = useState<CandidateFormInput>({
         fullName: '',
         phone: '',
@@ -41,13 +43,24 @@ export default function CandidateApplicationForm({ submitAction }: CandidateAppl
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    // Format number with commas (e.g. 1900 -> "1,900")
+    const formatNumber = (num: string) => {
+        const n = num.replace(/[^0-9]/g, '');
+        return n ? parseInt(n).toLocaleString('en-US') : '';
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
         setStep('submitting');
 
+        // Combine currency + amount into standardized format
+        const formattedSalary = salaryAmount.trim()
+            ? `${salaryCurrency} ${formatNumber(salaryAmount)}`
+            : '';
+
         try {
-            const result = await submitAction(formData);
+            const result = await submitAction({ ...formData, salary: formattedSalary });
             if (result.success) {
                 setStep('success');
             } else {
@@ -216,14 +229,27 @@ export default function CandidateApplicationForm({ submitAction }: CandidateAppl
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-1">Expected Salary (USD/Month)</label>
-                            <input
-                                name="salary"
-                                value={formData.salary}
-                                onChange={handleChange}
-                                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue-500 outline-none"
-                                placeholder="e.g. Negotiable or 500-700"
-                            />
+                            <label className="block text-sm font-semibold text-slate-700 mb-1">Expected Salary (Monthly)</label>
+                            <div className="flex gap-2">
+                                <select
+                                    value={salaryCurrency}
+                                    onChange={(e) => setSalaryCurrency(e.target.value)}
+                                    className="w-28 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue-500 outline-none bg-white"
+                                >
+                                    <option value="USD">USD</option>
+                                    <option value="LAK">LAK</option>
+                                    <option value="THB">THB</option>
+                                    <option value="CNY">CNY</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    inputMode="numeric"
+                                    value={salaryAmount}
+                                    onChange={(e) => setSalaryAmount(e.target.value.replace(/[^0-9]/g, ''))}
+                                    className="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue-500 outline-none"
+                                    placeholder="e.g. 1900"
+                                />
+                            </div>
                         </div>
                         <div>
                             <label className="block text-sm font-semibold text-slate-700 mb-1">Languages *</label>
