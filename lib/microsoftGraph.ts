@@ -57,7 +57,8 @@ async function getAccessToken(): Promise<string> {
 export async function sendEmailGraph(emailData: EmailData): Promise<void> {
     try {
         const accessToken = await getAccessToken();
-        const senderEmail = process.env.AZURE_SENDER_EMAIL || process.env.SMTP_USER; // Fallback for backward compatibility
+        const senderEmail = process.env.AZURE_SENDER_EMAIL || process.env.SMTP_USER; // Mailbox used for Graph API path
+        const fromEmail = process.env.AZURE_FROM_EMAIL || senderEmail; // "From" address (Send As)
 
         if (!senderEmail) {
             throw new Error('Sender email (AZURE_SENDER_EMAIL) is not configured.');
@@ -74,7 +75,7 @@ export async function sendEmailGraph(emailData: EmailData): Promise<void> {
                 subject: emailData.subject,
                 from: {
                     emailAddress: {
-                        address: senderEmail,
+                        address: fromEmail,
                         name: "People Partners Laos"
                     }
                 },

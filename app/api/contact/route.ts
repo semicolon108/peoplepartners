@@ -162,6 +162,7 @@ export async function POST(req: NextRequest) {
         appendRequest({
             name: `${firstName} ${lastName}`,
             email: email,
+            phone: sanitizedData.phone || 'N/A',
             company: company || 'N/A',
             service: service || 'Contact Request',
             message: message

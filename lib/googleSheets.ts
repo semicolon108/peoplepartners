@@ -19,6 +19,7 @@ export interface Candidate {
     notPreferred?: string;
     travel?: string;
     gender?: string;
+    requestCount?: number;
 }
 
 export async function getCandidates(): Promise<Candidate[]> {
@@ -63,7 +64,7 @@ export async function getCandidates(): Promise<Candidate[]> {
         try {
             const response = await sheets.spreadsheets.values.get({
                 spreadsheetId: sheetId,
-                range: 'Data_local!A2:S', // Extended to Column S (Index 18)
+                range: 'Data_local!A2:T', // Extended to Column T (Index 19) for Request Count
             });
 
             const rows = response.data.values;
@@ -106,6 +107,7 @@ export async function getCandidates(): Promise<Candidate[]> {
                     travel: row[16] || '',
                     status: row[17] || 'Inactive',
                     manatalLink: row[18] || '', // Column S
+                    requestCount: parseInt(row[19] || '0', 10), // Column T
                     skills: combinedSkills,
                 };
             })
@@ -267,6 +269,7 @@ export async function addCandidate(data: CandidateFormInput): Promise<{ success:
 export async function appendRequest(data: {
     name: string;
     email: string;
+    phone: string;
     company: string;
     service: string;
     message: string;
@@ -309,18 +312,239 @@ export async function appendRequest(data: {
         const get = (type: string) => parts.find(p => p.type === type)?.value ?? '';
         const date = "'" + `${get('year')}-${get('month')}-${get('day')} ${get('hour')}:${get('minute')}:${get('second')}`;
 
-        await sheets.spreadsheets.values.append({
+        const appendResponse = await sheets.spreadsheets.values.append({
             spreadsheetId: sheetId,
-            range: 'Requests!A:F',
+            range: 'Requests!A:G',
             valueInputOption: 'USER_ENTERED',
             insertDataOption: 'INSERT_ROWS',
             requestBody: {
                 values: [
-                    [date, data.name, data.email, data.company, data.service, data.message]
+                    [date, data.name, data.email, data.phone, data.company, data.service, data.message]
                 ],
             },
         });
         console.log("Request saved to Google Sheets successfully.");
+
+        // --- Hyperlink candidate IDs in column F (service/Candidate IDs) ---
+        try {
+            const serviceText = data.service || '';
+            // Match candidate ID patterns like PPLHT-0001, PPL_INST-0002, etc.
+            const idRegex = /PPL[A-Z_]+-\d+/g;
+            const idMatches: { id: string; start: number; end: number }[] = [];
+            let match: RegExpExecArray | null;
+            while ((match = idRegex.exec(serviceText)) !== null) {
+                idMatches.push({ id: match[0], start: match.index, end: match.index + match[0].length });
+            }
+
+            if (idMatches.length > 0) {
+                // 1. Get the appended row number from the response
+                const updatedRange = appendResponse.data.updates?.updatedRange || '';
+                // updatedRange looks like "Requests!A5:F5"
+                const rowMatch = updatedRange.match(/(\d+)$/);
+                if (!rowMatch) throw new Error('Could not determine appended row number');
+                const appendedRow = parseInt(rowMatch[1]!);
+
+                // 2. Get sheet metadata to find Data_local and Requests sheet GIDs
+                const spreadsheet = await sheets.spreadsheets.get({
+                    spreadsheetId: sheetId,
+                    fields: 'sheets.properties',
+                });
+                const sheetsList = spreadsheet.data.sheets || [];
+                const requestsSheet = sheetsList.find(s => s.properties?.title === 'Requests');
+                const dataLocalSheet = sheetsList.find(s => s.properties?.title === 'Data_local');
+
+                if (!requestsSheet?.properties?.sheetId && requestsSheet?.properties?.sheetId !== 0) {
+                    throw new Error('Requests sheet not found');
+                }
+                if (!dataLocalSheet?.properties?.sheetId && dataLocalSheet?.properties?.sheetId !== 0) {
+                    throw new Error('Data_local sheet not found');
+                }
+
+                const requestsSheetId = requestsSheet.properties.sheetId!;
+                const dataLocalSheetGid = dataLocalSheet.properties.sheetId!;
+
+                // 3. Look up each candidate ID's row in Data_local column B
+                const dataLocalIds = await sheets.spreadsheets.values.get({
+                    spreadsheetId: sheetId,
+                    range: 'Data_local!B:B',
+                });
+                const idRows = dataLocalIds.data.values || [];
+
+                const idToRow: Record<string, number> = {};
+                idRows.forEach((row, index) => {
+                    if (row[0]) {
+                        idToRow[row[0].toString().trim()] = index + 1; // 1-indexed row number
+                    }
+                });
+
+                // 4. Build textFormatRuns for the service cell (column E = index 4)
+                //    Each run starts at a character position and applies formatting from that position onward
+                const textFormatRuns: Array<{
+                    startIndex: number;
+                    format: {
+                        link?: { uri: string };
+                        foregroundColor?: { red: number; green: number; blue: number };
+                        bold?: boolean;
+                        underline?: boolean;
+                    };
+                }> = [];
+
+                // Start with default formatting at position 0
+                textFormatRuns.push({
+                    startIndex: 0,
+                    format: {},
+                });
+
+                for (const idMatch of idMatches) {
+                    const candidateRow = idToRow[idMatch.id];
+                    if (candidateRow) {
+                        const linkUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/edit#gid=${dataLocalSheetGid}&range=B${candidateRow}`;
+
+                        // Format run for the ID text (blue, bold, underlined, linked)
+                        textFormatRuns.push({
+                            startIndex: idMatch.start,
+                            format: {
+                                link: { uri: linkUrl },
+                                foregroundColor: { red: 0.07, green: 0.34, blue: 0.8 },
+                                bold: true,
+                                underline: true,
+                            },
+                        });
+
+                        // Reset formatting after the ID
+                        textFormatRuns.push({
+                            startIndex: idMatch.end,
+                            format: {},
+                        });
+                    }
+                }
+
+                // Only apply if we found at least one valid ID
+                if (textFormatRuns.length > 1) {
+                    // Sort by startIndex to ensure correct order
+                    textFormatRuns.sort((a, b) => a.startIndex - b.startIndex);
+
+                    await sheets.spreadsheets.batchUpdate({
+                        spreadsheetId: sheetId,
+                        requestBody: {
+                            requests: [
+                                {
+                                    updateCells: {
+                                        rows: [
+                                            {
+                                                values: [
+                                                    {
+                                                        userEnteredValue: { stringValue: serviceText },
+                                                        textFormatRuns: textFormatRuns,
+                                                    },
+                                                ],
+                                            },
+                                        ],
+                                        fields: 'userEnteredValue,textFormatRuns',
+                                        range: {
+                                            sheetId: requestsSheetId,
+                                            startRowIndex: appendedRow - 1,   // 0-indexed
+                                            endRowIndex: appendedRow,
+                                            startColumnIndex: 5,              // Column F (0-indexed)
+                                            endColumnIndex: 6,
+                                        },
+                                    },
+                                },
+                            ],
+                        },
+                    });
+                    console.log(`Hyperlinked ${textFormatRuns.length > 1 ? (textFormatRuns.length - 1) / 2 : 0} candidate IDs in Requests sheet.`);
+                }
+            }
+        } catch (linkError) {
+            // Don't fail the entire operation if hyperlinking fails
+            console.error('Warning: Failed to hyperlink candidate IDs (row was still appended):', linkError);
+        }
+
+        // --- Increment Request Count in Data_local Column T (Index 19) ---
+        try {
+            const serviceText = data.service || '';
+            const idRegex = /PPL[A-Z_]+-\d+/g;
+            let match: RegExpExecArray | null;
+            const targetIds: string[] = [];
+
+            // Re-match to be safe (regex object is stateful)
+            while ((match = idRegex.exec(serviceText)) !== null) {
+                targetIds.push(match[0]);
+            }
+
+            if (targetIds.length > 0) {
+                // Get sheet metadata to find Data_local sheet ID
+                const spreadsheet = await sheets.spreadsheets.get({
+                    spreadsheetId: sheetId,
+                    fields: 'sheets.properties',
+                });
+                const dataLocalSheet = spreadsheet.data.sheets?.find(s => s.properties?.title === 'Data_local');
+                if (!dataLocalSheet?.properties?.sheetId && dataLocalSheet?.properties?.sheetId !== 0) {
+                    throw new Error('Data_local sheet not found for incrementing count');
+                }
+
+                // Get all IDs to find row numbers
+                const dataLocalIds = await sheets.spreadsheets.values.get({
+                    spreadsheetId: sheetId,
+                    range: 'Data_local!B:B',
+                });
+                const idRows = dataLocalIds.data.values || [];
+                const idToRow: Record<string, number> = {};
+                idRows.forEach((row, index) => {
+                    if (row[0]) {
+                        idToRow[row[0].toString().trim()] = index + 1; // 1-indexed
+                    }
+                });
+
+                // Find rows to update
+                const rowsToUpdate: number[] = [];
+                targetIds.forEach(id => {
+                    if (idToRow[id]) {
+                        rowsToUpdate.push(idToRow[id]);
+                    }
+                });
+
+                if (rowsToUpdate.length > 0) {
+                    // Fetch current counts for these rows from Column T
+                    // We fetch the whole column T to be simple, but could optimize later
+                    const currentCountsRes = await sheets.spreadsheets.values.get({
+                        spreadsheetId: sheetId,
+                        range: 'Data_local!T:T',
+                    });
+                    const currentCounts = currentCountsRes.data.values || [];
+
+                    const dataToUpdate: { range: string; values: string[][] }[] = [];
+
+                    rowsToUpdate.forEach(rowNum => {
+                        const rowIndex = rowNum - 1; // 0-indexed array access
+                        // Check if row exists in currentCounts
+                        const currentValStr = (currentCounts[rowIndex] && currentCounts[rowIndex][0]) ? currentCounts[rowIndex][0] : '0';
+                        const currentVal = parseInt(currentValStr, 10);
+                        const newVal = (isNaN(currentVal) ? 0 : currentVal) + 1;
+
+                        dataToUpdate.push({
+                            range: `Data_local!T${rowNum}`,
+                            values: [[newVal.toString()]]
+                        });
+                    });
+
+                    // Batch update the new counts
+                    if (dataToUpdate.length > 0) {
+                        await sheets.spreadsheets.values.batchUpdate({
+                            spreadsheetId: sheetId,
+                            requestBody: {
+                                valueInputOption: 'USER_ENTERED',
+                                data: dataToUpdate
+                            }
+                        });
+                        console.log(`Incremented request counts for candidates at rows: ${rowsToUpdate.join(', ')}`);
+                    }
+                }
+            }
+        } catch (countError) {
+            console.error('Warning: Failed to increment request counts:', countError);
+        }
 
     } catch (error) {
         console.error("Failed to save request to Google Sheets:", error);

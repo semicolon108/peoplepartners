@@ -58,6 +58,7 @@ export default function ContactModal({ isOpen, onClose, candidates, onRemoveCand
                 firstName: formData.get('firstName'),
                 lastName: formData.get('lastName'),
                 email: formData.get('email'),
+                phone: formData.get('phone'),
                 company: formData.get('company'),
                 message: formData.get('message'),
                 service: `Bulk Candidate Inquiry: ${candidateDetails}`,
@@ -184,15 +185,26 @@ export default function ContactModal({ isOpen, onClose, candidates, onRemoveCand
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium text-brand-gray-700 mb-1">Company</label>
+                                        <label className="block text-sm font-medium text-brand-gray-700 mb-1">Phone</label>
                                         <input
-                                            name="company"
-                                            type="text"
+                                            name="phone"
+                                            type="tel"
                                             disabled={isSubmitting}
                                             className="w-full px-4 py-2 border border-brand-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue-500 outline-none"
-                                            placeholder="Company Name"
+                                            placeholder="+856 20 XXXX XXXX"
                                         />
                                     </div>
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-medium text-brand-gray-700 mb-1">Company</label>
+                                    <input
+                                        name="company"
+                                        type="text"
+                                        disabled={isSubmitting}
+                                        className="w-full px-4 py-2 border border-brand-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue-500 outline-none"
+                                        placeholder="Company Name"
+                                    />
                                 </div>
 
                                 <div>

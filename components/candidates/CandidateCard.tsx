@@ -1,6 +1,6 @@
 
 import { Candidate } from '@/lib/googleSheets';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, Flame } from 'lucide-react';
 
 interface CandidateCardProps {
     candidate: Candidate;
@@ -11,13 +11,17 @@ interface CandidateCardProps {
 }
 
 export default function CandidateCard({ candidate, isSelected, onToggleSelection, onRequestInterview, onViewProfile }: CandidateCardProps) {
+    const isInDemand = (candidate.requestCount || 0) >= 3;
+
     return (
         <div
             className={`
                 relative bg-white rounded-2xl border flex flex-col h-full transition-all duration-300 group overflow-hidden
                 ${isSelected
                     ? 'border-brand-blue-500 shadow-xl ring-2 ring-brand-blue-500/20 translate-y-[-2px]'
-                    : 'border-gray-100 shadow-sm hover:shadow-xl hover:translate-y-[-4px] hover:border-brand-blue-100'}
+                    : isInDemand
+                        ? 'border-orange-200 shadow-md hover:shadow-xl hover:translate-y-[-4px] hover:border-orange-300 ring-1 ring-orange-100'
+                        : 'border-gray-100 shadow-sm hover:shadow-xl hover:translate-y-[-4px] hover:border-brand-blue-100'}
             `}
         >
             {/* Selection Checkbox - Top Right */}
@@ -39,14 +43,18 @@ export default function CandidateCard({ candidate, isSelected, onToggleSelection
                 </button>
             </div>
 
+
+
             {/* Content Container */}
             <div className="p-6 flex flex-col flex-grow">
 
                 {/* Header */}
                 <div className="mb-4 pr-8">
-                    <span className="inline-block px-3 py-1 bg-brand-blue-50 text-brand-blue-700 text-xs font-bold rounded-lg mb-3 tracking-wide">
-                        {candidate.role}
-                    </span>
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                        <span className="inline-block px-3 py-1 bg-brand-blue-50 text-brand-blue-700 text-xs font-bold rounded-lg tracking-wide">
+                            {candidate.role}
+                        </span>
+                    </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-1">
                         Candidate #{candidate.id}
                     </h3>
@@ -61,7 +69,13 @@ export default function CandidateCard({ candidate, isSelected, onToggleSelection
                 </div>
 
                 {/* Tags (Age/Gender) */}
-                <div className="flex gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4">
+                    {isInDemand && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded-md border border-orange-100 shadow-sm">
+                            <Flame size={12} className="fill-orange-500 text-orange-600 animate-pulse" />
+                            In Demand
+                        </span>
+                    )}
                     {candidate.gender && (
                         <span className="px-2.5 py-1 bg-purple-50 text-purple-700 text-xs font-semibold rounded-md border border-purple-100">
                             {candidate.gender}
