@@ -44,7 +44,7 @@ export async function getManatalJobs(): Promise<Job[]> {
         while (nextUrl) {
             console.log(`Fetching: ${nextUrl}`);
             const response = await fetch(nextUrl, {
-                next: { revalidate: 3600 },
+                next: { revalidate: 360 },
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
