@@ -238,7 +238,7 @@ export default function RiasecForm() {
                 {pdfUrl && (
                     <div className="mb-8">
                         <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
-                            <p className="text-green-800 font-bold mb-1">ບົດລາຍງານຂອງທ່ານພ້ອມແລ້ວ! (Your report is ready!)</p>
+                            <p className="text-green-800 font-bold mb-1">ບົດທົດສອບຂອງທ່ານພ້ອມແລ້ວ! (Your report is ready!)</p>
                             <p className="text-green-700 text-sm">ກະລຸນາກົດປຸ່ມລຸ່ມນີ້ເພື່ອດາວໂຫລດ.</p>
                         </div>
                         <a
@@ -248,7 +248,7 @@ export default function RiasecForm() {
                             className="block w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
                         >
                             <Download size={24} />
-                            <span>Download PDF Report / ດາວໂຫລດບົດລາຍງານ</span>
+                            <span>Download PDF Report / ດາວໂຫລດບົດທົດສອບ</span>
                         </a>
                     </div>
                 )}
@@ -258,17 +258,17 @@ export default function RiasecForm() {
                         <h4 className="font-bold text-slate-900 mb-3 text-lg">ຂັ້ນຕອນຕໍ່ໄປ (Next Steps):</h4>
                         <ul className="list-disc list-inside text-slate-700 space-y-3">
                             <li>
-                                <span className="font-medium">ນັກໃຫ້ຄຳປຶກສາອາຊີບຂອງພວກເຮົາຈະວິເຄາະຂໍ້ມູນຂອງທ່ານ.</span>
+                                <span className="font-medium">ຜູ້ຊ່ຽວຊານໃນການໃຫ້ຄຳປຶກສາດ້ານອາຊີບຂອງພວກເຮົາຈະວິເຄາະຂໍ້ມູນຂອງທ່ານ.</span>
                                 <div className="text-sm text-slate-500 pl-5 pt-1">Our career counselors will analyze your profile.</div>
                             </li>
                             {pdfUrl ? (
                                 <li>
-                                    <span className="font-medium">ທ່ານສາມາດເບິ່ງບົດລາຍງານເບື້ອງຕົ້ນໄດ້ເລີຍ.</span>
+                                    <span className="font-medium">ທ່ານສາມາດເບິ່ງບົດທົດສອບເບື້ອງຕົ້ນໄດ້ເລີຍ.</span>
                                     <div className="text-sm text-slate-500 pl-5 pt-1">You can view your preliminary report immediately.</div>
                                 </li>
                             ) : (
                                 <li>
-                                    <span className="font-medium">ທ່ານຈະໄດ້ຮັບບົດລາຍງານຜ່ານທາງອີເມວທີ່ທ່ານໃຫ້ໄວ້ ({personalInfo.email}).</span>
+                                    <span className="font-medium">ທ່ານຈະໄດ້ຮັບບົດທົດສອບຜ່ານທາງອີເມວທີ່ທ່ານໃຫ້ໄວ້ ({personalInfo.email}).</span>
                                     <div className="text-sm text-slate-500 pl-5 pt-1">You will receive the report via the email you provided ({personalInfo.email}).</div>
                                 </li>
                             )}
@@ -280,11 +280,11 @@ export default function RiasecForm() {
                         <div className="space-y-2 text-slate-600">
                             <p className="flex items-center gap-2">
                                 <span className="font-semibold w-24">ໂທ (Tel):</span>
-                                <span className="font-mono text-brand-blue-600">+856 20 xxxx xxxx</span>
+                                <span className="font-mono text-brand-blue-600">+856 20 541 29 234</span>
                             </p>
                             <p className="flex items-center gap-2">
                                 <span className="font-semibold w-24">ອີເມວ (Mail):</span>
-                                <span className="font-mono text-brand-blue-600">contact@peoplepartners.la</span>
+                                <span className="font-mono text-brand-blue-600">learning4lee@gmail.com</span>
                             </p>
                         </div>
                     </div>
