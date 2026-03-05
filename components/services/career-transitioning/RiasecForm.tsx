@@ -11,7 +11,7 @@ export default function RiasecForm() {
     const [answers, setAnswers] = useState<Record<number, string>>({});
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [error, setError] = useState<string | null>(null);
-    const [pdfUrl] = useState<string | null>(null);
+    const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
     const currentQuestion = questions[currentQuestionIndex];
 
@@ -88,9 +88,8 @@ export default function RiasecForm() {
             timestamp: new Date().toISOString()
         };
 
-        /*
         // ==================================================================================
-        // VERSION 1: Instant PDF Download (CURRENTLY ACTIVE)
+        // VERSION 1: Instant PDF Download (EVENT PERIOD - FREE)
         // This version expects the Google Script to return a JSON with { status: 'success', pdfUrl: '...' }
         // ==================================================================================
         try {
@@ -118,11 +117,11 @@ export default function RiasecForm() {
             setError('Something went wrong. Please check your connection and try again.');
             setStep('assessment');
         }
-        */
 
+        /*
         // ==================================================================================
-        // VERSION 2: Email Only Report (LEGACY / BACKUP)
-        // Use this if you want to switch back to the version where users receive the report via email only.
+        // VERSION 2: Email Only Report (PAID MODE - ADMIN MANUAL SEND)
+        // Use this if you want to switch back to the version where admin sends report manually.
         // This handles standard 'no-cors' submission if needed.
         // ==================================================================================
         try {
@@ -147,6 +146,7 @@ export default function RiasecForm() {
             setError('Something went wrong. Please try again.');
             setStep('assessment');
         }
+        */
 
     };
 
