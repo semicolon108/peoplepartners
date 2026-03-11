@@ -67,8 +67,14 @@ export const personalQuestions: PersonalQuestion[] = [
         id: "currentJob",
         labelLao: "ອາຊີບຂອງຜູ້ທົດສອບແມ່ນຫຍັງ?",
         labelEng: "Current Profession",
-        type: "text",
-        placeholder: "Example: Student, Accountant, etc.",
+        type: "select",
+        options: [
+            { value: "Student", labelLao: "ນັກຮຽນ/ນັກສຶກສາ", labelEng: "Student" },
+            { value: "Employee", labelLao: "ພະນັກງານ", labelEng: "Employee" },
+            { value: "Business Owner", labelLao: "ເຈົ້າຂອງທຸລະກິດ", labelEng: "Business Owner" },
+            { value: "Freelancer", labelLao: "ອາຊີບອິດສະຫຼະ", labelEng: "Freelancer" },
+            { value: "Looking for a Job", labelLao: "ກໍາລັງຊອກວຽກ", labelEng: "Looking for a Job" }
+        ],
         required: true
     },
     {

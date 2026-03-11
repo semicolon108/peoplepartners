@@ -21,13 +21,18 @@ export default function RiasecForm() {
     const progress = step === 'welcome' || step === 'personal' ? 0 : ((currentQuestionIndex) / totalSteps) * 100;
 
     // Filter validation
-    const isPersonalStepValid = () => {
-        return personalQuestions.every(q => {
+    const isPersonalStepValid = () =>
+        personalQuestions.every(q => {
             if (!q.required) return true;
+            
+            // Skip industry and experience requirements if current profession is Student
+            if (personalInfo.currentJob === 'Student' && (q.id === 'industry' || q.id === 'experience')) {
+                return true;
+            }
+
             const val = personalInfo[q.id];
             return val && val.trim() !== '';
         });
-    };
 
     const handlePersonalSubmit = () => {
         if (isPersonalStepValid()) {
@@ -340,42 +345,51 @@ export default function RiasecForm() {
                             </div>
                         )}
                         <div className="grid gap-4 md:grid-cols-2">
-                            {personalQuestions.map((q) => (
-                                <div key={q.id} className={q.type === 'email' || q.type === 'text' && (q.id === 'currentJob' || q.id === 'reason') ? 'md:col-span-2' : ''}>
-                                    <label className="block mb-1">
-                                        <span className="text-base font-semibold text-slate-800 block">{q.labelLao}</span>
-                                        <span className="text-xs text-slate-500 font-normal">{q.labelEng} {q.required && '*'}</span>
-                                    </label>
-                                    {q.type === 'select' ? (
-                                        <select
-                                            className="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue-500 focus:border-brand-blue-500 outline-none transition-all text-sm md:text-base"
-                                            value={personalInfo[q.id] || ''}
-                                            onChange={(e) => {
-                                                setPersonalInfo(prev => ({ ...prev, [q.id]: e.target.value }));
-                                                setError(null);
-                                            }}
-                                        >
-                                            <option value="">Select / ເລືອກ</option>
-                                            {q.options?.map(opt => (
-                                                <option key={opt.value} value={opt.value}>
-                                                    {opt.labelLao} ({opt.labelEng})
-                                                </option>
-                                            ))}
-                                        </select>
-                                    ) : (
-                                        <input
-                                            type={q.type}
-                                            placeholder={q.placeholder}
-                                            className="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue-500 focus:border-brand-blue-500 outline-none transition-all text-sm md:text-base"
-                                            value={personalInfo[q.id] || ''}
-                                            onChange={(e) => {
-                                                setPersonalInfo(prev => ({ ...prev, [q.id]: e.target.value }));
-                                                setError(null);
-                                            }}
-                                        />
-                                    )}
-                                </div>
-                            ))}
+                            {personalQuestions.map((q) => {
+                                // Skip industry and experience if current profession is Student
+                                if (personalInfo.currentJob === 'Student' && (q.id === 'industry' || q.id === 'experience')) {
+                                    return null;
+                                }
+
+                                const isWide = q.type === 'email' || (q.type === 'text' && (q.id === 'currentJob' || q.id === 'reason'));
+                                
+                                return (
+                                    <div key={q.id} className={isWide ? 'md:col-span-2' : ''}>
+                                        <label className="block mb-1">
+                                            <span className="text-base font-semibold text-slate-800 block">{q.labelLao}</span>
+                                            <span className="text-xs text-slate-500 font-normal">{q.labelEng} {q.required && '*'}</span>
+                                        </label>
+                                        {q.type === 'select' ? (
+                                            <select
+                                                className="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue-500 focus:border-brand-blue-500 outline-none transition-all text-sm md:text-base"
+                                                value={personalInfo[q.id] || ''}
+                                                onChange={(e) => {
+                                                    setPersonalInfo(prev => ({ ...prev, [q.id]: e.target.value }));
+                                                    setError(null);
+                                                }}
+                                            >
+                                                <option value="">Select / ເລືອກ</option>
+                                                {q.options?.map(opt => (
+                                                    <option key={opt.value} value={opt.value}>
+                                                        {opt.labelLao} ({opt.labelEng})
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        ) : (
+                                            <input
+                                                type={q.type}
+                                                placeholder={q.placeholder}
+                                                className="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue-500 focus:border-brand-blue-500 outline-none transition-all text-sm md:text-base"
+                                                value={personalInfo[q.id] || ''}
+                                                onChange={(e) => {
+                                                    setPersonalInfo(prev => ({ ...prev, [q.id]: e.target.value }));
+                                                    setError(null);
+                                                }}
+                                            />
+                                        )}
+                                    </div>
+                                );
+                            })}
                         </div>
                         <button
                             onClick={handlePersonalSubmit}
