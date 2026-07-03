@@ -18,8 +18,6 @@ export default function CareerTransitioningView() {
                 icon={serviceData.heroIcon}
                 buttonText="Start Your Career Journey"
                 buttonLink="/contact#consultation"
-                secondaryButtonText="Take RIASEC Assessment"
-                secondaryButtonLink="/services/career-transitioning/riasec"
             />
             <main>
                 <section className="py-20 bg-white">

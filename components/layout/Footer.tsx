@@ -4,7 +4,6 @@ import Image from "next/image";
 
 // Categorized links to match Header.tsx
 const employerLinks = [
-  { name: "InstaTalent", href: "/candidates" },
   { name: "Recruitment Services", href: "/services/recruitment" },
   { name: "PEO / Employer of Record", href: "/services/peo" },
   { name: "Payroll Services", href: "/services/payroll" },
@@ -18,7 +17,6 @@ const employerLinks = [
 const candidateLinks = [
   { name: "Browse Jobs", href: "/careers" },
   { name: "Submit Your CV", href: "/apply" },
-  { name: "Personality Assessment", href: "/services/career-transitioning/riasec" },
 ];
 
 const companyLinks = [

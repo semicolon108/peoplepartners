@@ -34,7 +34,6 @@ const navigation: NavSection[] = [
       {
         name: 'Find Talent',
         items: [
-          { name: 'InstaTalent', href: '/candidates' },
           { name: 'Recruitment Services', href: '/services/recruitment' },
         ]
       },
@@ -59,7 +58,6 @@ const navigation: NavSection[] = [
     items: [
       { name: 'Browse Jobs', href: '/careers' },
       { name: 'Submit Your CV', href: '/apply' },
-      { name: 'Personality Assessment', href: '/services/career-transitioning/riasec' },
     ]
   },
   { name: 'Why Choose Us?', href: '/about', type: 'link' },
