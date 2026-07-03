@@ -1,6 +1,7 @@
 import { getNewsBySlug, getAllNews } from '@/lib/news';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import Breadcrumb from '@/components/services/Breadcrumb';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -85,7 +86,7 @@ export default async function NewsPost({ params }: PageProps) {
 
                         {/* Content */}
                         <div className="prose prose-lg prose-blue max-w-none text-brand-gray-700">
-                            <ReactMarkdown>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
                                 {post.content}
                             </ReactMarkdown>
                         </div>
